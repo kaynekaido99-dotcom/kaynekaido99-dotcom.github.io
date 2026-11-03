@@ -108,6 +108,7 @@
             const actions = $$(':scope > div:last-child > *', profile);
 
             gsap.set(profile, { autoAlpha: 0 });
+            window.__countersLocked = true; // app.js must not touch the poke text while it morphs
             const pokesMorph = morph(pokes);
 
             // skeleton avatar
@@ -131,6 +132,7 @@
             const tl = gsap.timeline({ paused: true });
             tl.to(profile, { autoAlpha: 1, duration: 0.8, ease: 'power2.out', clearProps: 'opacity,visibility' })
                 .add(pokesMorph, 0.3)
+                .add(() => { window.__countersLocked = false; if (window.renderCounters) window.renderCounters(); }, 2.9)
                 .to(sk, { autoAlpha: 0, duration: 0.4, ease: 'power1.out' }, 1.2)
                 .to(avatarImg, { autoAlpha: 1, duration: 0.5, clearProps: 'opacity,visibility' }, 1.2)
                 .add(() => sk.remove(), 1.7)
