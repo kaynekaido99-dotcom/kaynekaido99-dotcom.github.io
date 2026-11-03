@@ -4,23 +4,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Shared counters stored in Google Drive via a Google Apps Script web app (see Code.gs).
     // Paste your deployed Web app URL (ends in /exec) below.
-    const API_URL = 'PASTE_YOUR_APPS_SCRIPT_WEB_APP_URL_HERE';
+    const API_URL = 'https://script.google.com/macros/s/AKfycbws7oAhkPp8cONekfchIQeEcSppOukZqSozkwG5EeiJ2BsCy9TwWkOm4js0JoH9eAiC/exec';
 
     const pokeCountElement = document.getElementById('poke-count-text');
-    const visitCountElement = document.getElementById('visit-count-text');
     const pokeButton = document.getElementById('btn-poke');
     const counterStatus = document.getElementById('counter-status');
     const idStorageKey = 'portfolio-visitor-id';
-    const visitSessionKey = 'portfolio-visit-counted';
-    const cacheKey = 'portfolio-counters-cache';
     let counterStatusTimer;
 
-    // Last known state (cached so the numbers show instantly on the next load)
-    let state = { pokes: 0, visits: 0, you: { visits: 0, pokes: 0 } };
-    try {
-        const cached = JSON.parse(localStorage.getItem(cacheKey) || 'null');
-        if (cached && Number.isSafeInteger(cached.pokes) && Number.isSafeInteger(cached.visits)) state = cached;
-    } catch (e) { /* ignore bad cache */ }
+    // The displayed total is authoritative only after it has been read from the shared server.
+    let pokeCount = null;
+    let counterUnavailable = false;
 
     function getVisitorId() {
         try {
@@ -48,14 +42,16 @@ document.addEventListener('DOMContentLoaded', () => {
     // Exposed so entrance.js can refresh the numbers after its counter animation.
     window.renderCounters = function renderCounters() {
         if (window.__countersLocked) return; // entrance animation is writing to the element
-        pokeCountElement.textContent = `${formatCount(state.pokes)} ${state.pokes === 1 ? 'poke' : 'pokes'}`;
-        visitCountElement.textContent = `Visits: ${formatCount(state.visits)} · this browser: ${formatCount(state.you.visits)}`;
-        visitCountElement.title = 'Total visits across all visitors, and visits from this browser.';
+        pokeCountElement.textContent = pokeCount === null
+            ? (counterUnavailable ? 'Pokes unavailable' : 'Loading pokes…')
+            : `${formatCount(pokeCount)} ${pokeCount === 1 ? 'poke' : 'pokes'}`;
     };
 
     function applyServerState(data) {
-        state = { pokes: data.pokes, visits: data.visits, you: data.you || state.you };
-        try { localStorage.setItem(cacheKey, JSON.stringify(state)); } catch (e) { /* ignore */ }
+        if (!Number.isSafeInteger(data.pokes) || data.pokes < 0) {
+            throw new Error('Counter server returned an invalid poke total.');
+        }
+        pokeCount = data.pokes;
         window.renderCounters();
     }
 
@@ -74,48 +70,41 @@ document.addEventListener('DOMContentLoaded', () => {
 
     window.renderCounters();
 
-    // Count one visit per tab session (the server also dedupes by visitor for 30 minutes)
+    // Load the shared total. Never substitute a count saved in this browser.
+    pokeButton.disabled = true;
     (async () => {
-        let action = 'get';
         try {
-            if (!sessionStorage.getItem(visitSessionKey)) action = 'visit';
-        } catch (e) { /* sessionStorage blocked: just read */ }
-        try {
-            applyServerState(await callApi(action));
-            if (action === 'visit') {
-                try { sessionStorage.setItem(visitSessionKey, '1'); } catch (e) { /* ignore */ }
-            }
+            applyServerState(await callApi('get'));
         } catch (error) {
             console.error('Unable to load the portfolio counters:', error);
+            counterUnavailable = true;
+            window.renderCounters();
             showCounterStatus('Counters offline.');
+        } finally {
+            pokeButton.disabled = false;
         }
     })();
 
     pokeButton.addEventListener('click', async () => {
-        // Optimistic update so the button feels instant
-        const before = { pokes: state.pokes, visits: state.visits, you: { ...state.you } };
-        state.pokes += 1;
-        state.you.pokes += 1;
-        window.renderCounters();
-        showCounterStatus('Thanks for the poke!');
+        if (pokeButton.disabled) return;
+        pokeButton.disabled = true;
+        showCounterStatus('Sending poke…');
         pokeButton.classList.remove('is-poked');
         void pokeButton.offsetWidth;
         pokeButton.classList.add('is-poked');
         window.clearTimeout(counterStatusTimer);
-        counterStatusTimer = window.setTimeout(() => {
-            showCounterStatus('');
-            pokeButton.classList.remove('is-poked');
-        }, 1200);
 
         try {
             applyServerState(await callApi('poke'));
+            showCounterStatus('Thanks for the poke!');
+            counterStatusTimer = window.setTimeout(() => showCounterStatus(''), 1200);
         } catch (error) {
             console.error('Unable to save the portfolio poke:', error);
-            state = before; // roll back, nothing was recorded
-            window.renderCounters();
-            window.clearTimeout(counterStatusTimer);
             showCounterStatus('Could not save your poke. Try again later.');
             counterStatusTimer = window.setTimeout(() => showCounterStatus(''), 3000);
+        } finally {
+            pokeButton.disabled = false;
+            pokeButton.classList.remove('is-poked');
         }
     });
 
@@ -471,7 +460,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 // If a browser still blocks it, the controls stay visible to press play.
                 el.addEventListener('loadeddata', () => {
                     const p = el.play();
-                    if (p && p.catch) p.catch(() => {});
+                    if (p && p.catch) p.catch(() => { });
                 }, { once: true });
 
                 // Warn if the file really has no audio track
