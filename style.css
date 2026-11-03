@@ -28,6 +28,24 @@ body {
     animation: section-highlight 1.8s ease-out;
 }
 
+.counter-status:empty {
+    display: none;
+}
+
+.poke-button.is-poked {
+    animation: poke-bump 360ms ease-out;
+}
+
+@keyframes poke-bump {
+    45% {
+        transform: scale(1.12);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
 @keyframes section-highlight {
     0% {
         outline: 1px solid rgb(56 189 248 / 0.8);
@@ -94,6 +112,10 @@ body {
 
 @media (prefers-reduced-motion: reduce) {
     .section-highlight {
+        animation-duration: 1ms;
+    }
+
+    .poke-button.is-poked {
         animation-duration: 1ms;
     }
 

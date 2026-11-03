@@ -2,6 +2,77 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
+    // Browser-local counters. A shared total requires a configured server-side counter service.
+    const pokeCountElement = document.getElementById('poke-count-text');
+    const visitCountElement = document.getElementById('visit-count-text');
+    const pokeButton = document.getElementById('btn-poke');
+    const counterStatus = document.getElementById('counter-status');
+    const pokeStorageKey = 'portfolio-pokes';
+    const visitStorageKey = 'portfolio-visits';
+    let pokeCount = 0;
+    let counterStatusTimer;
+
+    function readStoredCount(key) {
+        const storedValue = localStorage.getItem(key);
+        if (storedValue === null) return 0;
+
+        const count = Number(storedValue);
+        if (!Number.isSafeInteger(count) || count < 0) {
+            throw new Error(`Invalid stored counter value for ${key}.`);
+        }
+        return count;
+    }
+
+    function formatCount(count) {
+        return new Intl.NumberFormat().format(count);
+    }
+
+    function showCounterStatus(message) {
+        counterStatus.textContent = message;
+    }
+
+    try {
+        pokeCount = readStoredCount(pokeStorageKey);
+        const visitCount = readStoredCount(visitStorageKey) + 1;
+        if (!Number.isSafeInteger(visitCount)) {
+            throw new RangeError('The visit counter has reached its maximum value.');
+        }
+
+        localStorage.setItem(visitStorageKey, String(visitCount));
+        pokeCountElement.textContent = `${formatCount(pokeCount)} pokes`;
+        visitCountElement.textContent = `Visits on this browser: ${formatCount(visitCount)}`;
+    } catch (error) {
+        console.error('Unable to initialize the portfolio counters:', error);
+        showCounterStatus('Counters unavailable in this browser.');
+        pokeButton.disabled = true;
+    }
+
+    pokeButton.addEventListener('click', () => {
+        try {
+            if (!Number.isSafeInteger(pokeCount + 1)) {
+                throw new RangeError('The poke counter has reached its maximum value.');
+            }
+
+            pokeCount += 1;
+            localStorage.setItem(pokeStorageKey, String(pokeCount));
+            pokeCountElement.textContent = `${formatCount(pokeCount)} pokes`;
+            showCounterStatus('Thanks for the poke!');
+            pokeButton.classList.remove('is-poked');
+            void pokeButton.offsetWidth;
+            pokeButton.classList.add('is-poked');
+            window.clearTimeout(counterStatusTimer);
+            counterStatusTimer = window.setTimeout(() => {
+                showCounterStatus('');
+                pokeButton.classList.remove('is-poked');
+            }, 1200);
+        } catch (error) {
+            window.clearTimeout(counterStatusTimer);
+            console.error('Unable to save the portfolio poke:', error);
+            showCounterStatus('Unable to save your poke in this browser.');
+            pokeButton.disabled = true;
+        }
+    });
+
     // 0. Avatar image lightbox
     const avatarTrigger = document.getElementById('avatar-trigger');
     const avatar = document.getElementById('profile-avatar');
