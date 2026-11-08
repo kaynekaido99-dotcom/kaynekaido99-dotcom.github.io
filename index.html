@@ -152,9 +152,67 @@
             </div>
             <!-- Action Buttons Bar -->
             <div class="p-4 bg-zinc-900/50 border-t border-zinc-800/60 flex flex-wrap gap-3">
-                <a href="#contact"
-                    class="flex-1 text-center py-2.5 px-4 bg-zinc-100 hover:bg-white text-zinc-900 font-medium text-sm rounded-lg transition-colors">
-                    Make a call &rarr;
+                <a href="#contact" class="call-button flex-1 text-center py-2.5 px-4 font-medium text-sm rounded-lg">
+
+                    <!-- Animated phone icon -->
+                    <span class="call-animation" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none">
+                            <path d="M22 16.92V19.92C22 20.48 21.54 20.94 20.98 20.92
+                C10.92 20.42 3.58 13.08 3.08 3.02
+                C3.06 2.46 3.52 2 4.08 2H7.08
+                C7.59 2 8.02 2.39 8.08 2.89
+                C8.23 4.23 8.58 5.54 9.12 6.78
+                C9.31 7.22 9.19 7.73 8.83 8.09
+                L7.56 9.36
+                C8.97 11.84 11.16 14.03 13.64 15.44
+                L14.91 14.17
+                C15.27 13.81 15.78 13.69 16.22 13.88
+                C17.46 14.42 18.77 14.77 20.11 14.92
+                C20.61 14.98 21 15.41 21 15.92Z" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                        </svg>
+                    </span>
+
+                    <span class="button-label">
+                        Make a call &rarr;
+                    </span>
+                    <!-- Small background phone icon 1 -->
+                    <span class="call-animation small-icon small-icon-one" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none">
+                            <path d="M22 16.92V19.92C22 20.48 21.54 20.94 20.98 20.92
+        C10.92 20.42 3.58 13.08 3.08 3.02
+        C3.06 2.46 3.52 2 4.08 2H7.08
+        C7.59 2 8.02 2.39 8.08 2.89
+        C8.23 4.23 8.58 5.54 9.12 6.78
+        C9.31 7.22 9.19 7.73 8.83 8.09
+        L7.56 9.36
+        C8.97 11.84 11.16 14.03 13.64 15.44
+        L14.91 14.17
+        C15.27 13.81 15.78 13.69 16.22 13.88
+        C17.46 14.42 18.77 14.77 20.11 14.92
+        C20.61 14.98 21 15.41 21 15.92Z" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                        </svg>
+                    </span>
+
+                    <!-- Small background phone icon 2 -->
+                    <span class="call-animation small-icon small-icon-two" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none">
+                            <path d="M22 16.92V19.92C22 20.48 21.54 20.94 20.98 20.92
+        C10.92 20.42 3.58 13.08 3.08 3.02
+        C3.06 2.46 3.52 2 4.08 2H7.08
+        C7.59 2 8.02 2.39 8.08 2.89
+        C8.23 4.23 8.58 5.54 9.12 6.78
+        C9.31 7.22 9.19 7.73 8.83 8.09
+        L7.56 9.36
+        C8.97 11.84 11.16 14.03 13.64 15.44
+        L14.91 14.17
+        C15.27 13.81 15.78 13.69 16.22 13.88
+        C17.46 14.42 18.77 14.77 20.11 14.92
+        C20.61 14.98 21 15.41 21 15.92Z" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                        </svg>
+                    </span>
                 </a>
                 <button id="btn-copy-email"
                     class="flex-1 py-2.5 px-4 bg-zinc-800 hover:bg-zinc-700 text-zinc-200 font-medium text-sm rounded-lg border border-zinc-700/60 transition-colors flex items-center justify-center gap-2">
@@ -627,6 +685,7 @@
         <button id="viewer-next" class="viewer-nav viewer-next" type="button" aria-label="Next">&rsaquo;</button>
         <p id="viewer-counter" class="viewer-counter font-mono"></p>
     </div>
+
 
     <!-- Script File -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
