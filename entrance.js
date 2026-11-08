@@ -150,7 +150,7 @@
             const services = $('#services', projects);
             const heads = $$('h3', services);
             const chips = $$('span.inline-flex', services);
-            const galleryBtns = $$(':scope > button', services);
+            const galleryItems = $$(':scope > button, :scope > a', services);
 
             gsap.set(projects, { autoAlpha: 0 });
             const h2Morph = morph(h2);
@@ -164,7 +164,7 @@
             });
 
             gsap.set(chips, { autoAlpha: 0, scale: 0, transformOrigin: '50% 50%' });
-            gsap.set(galleryBtns, { y: 30, autoAlpha: 0 });
+            gsap.set(galleryItems, { y: 30, autoAlpha: 0 });
 
             const tl = gsap.timeline({ paused: true });
             tl.to(projects, { autoAlpha: 1, duration: 0.7, ease: 'power2.out', clearProps: 'opacity,visibility' })
@@ -173,7 +173,7 @@
                 .add(typers[0], 1.3)
                 .add(typers[1], '>')
                 .to(chips, { autoAlpha: 1, scale: 1, duration: 0.4, ease: 'back.out(2)', stagger: 0.06, clearProps: CLEAR }, '>-0.1')
-                .to(galleryBtns, { y: 0, autoAlpha: 1, duration: 0.6, ease: 'power3.out', stagger: 0.15, clearProps: CLEAR }, '>-0.2');
+                .to(galleryItems, { y: 0, autoAlpha: 1, duration: 0.6, ease: 'power3.out', stagger: 0.6, clearProps: CLEAR }, '>-0.2');
             entrance.push({ el: projects, tl });
         }
 

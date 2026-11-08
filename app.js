@@ -541,4 +541,17 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Videos button: same <button> as the original markup (keeps the entrance animation
+    // identical), but it opens the full gallery page instead of the modal.
+    document.querySelectorAll('[data-gallery-href]').forEach((btn) => {
+        btn.addEventListener('click', (event) => {
+            const url = btn.dataset.galleryHref;
+            if (event.ctrlKey || event.metaKey) window.open(url, '_blank', 'noopener');
+            else window.location.href = url;
+        });
+        btn.addEventListener('auxclick', (event) => {
+            if (event.button === 1) window.open(btn.dataset.galleryHref, '_blank', 'noopener');
+        });
+    });
+
 });
