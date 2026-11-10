@@ -2,6 +2,112 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
+    // Shared counters stored in Google Drive via a Google Apps Script web app (see Code.gs).
+    // Paste your deployed Web app URL (ends in /exec) below.
+    const API_URL = 'https://script.google.com/macros/s/AKfycbws7oAhkPp8cONekfchIQeEcSppOukZqSozkwG5EeiJ2BsCy9TwWkOm4js0JoH9eAiC/exec';
+
+    const pokeCountElement = document.getElementById('poke-count-text');
+    const pokeButton = document.getElementById('btn-poke');
+    const counterStatus = document.getElementById('counter-status');
+    const idStorageKey = 'portfolio-visitor-id';
+    let counterStatusTimer;
+
+    // The displayed total is authoritative only after it has been read from the shared server.
+    let pokeCount = null;
+    let counterUnavailable = false;
+
+    function getVisitorId() {
+        try {
+            let id = localStorage.getItem(idStorageKey);
+            if (!id) {
+                id = (window.crypto && crypto.randomUUID) ? crypto.randomUUID()
+                    : 'v-' + Date.now().toString(36) + Math.random().toString(36).slice(2, 10);
+                localStorage.setItem(idStorageKey, id);
+            }
+            return id;
+        } catch (e) {
+            return 'v-' + Math.random().toString(36).slice(2, 14); // storage blocked: per-page-load id
+        }
+    }
+    const visitorId = getVisitorId();
+
+    function formatCount(count) {
+        return new Intl.NumberFormat().format(count);
+    }
+
+    function showCounterStatus(message) {
+        counterStatus.textContent = message;
+    }
+
+    // Exposed so entrance.js can refresh the numbers after its counter animation.
+    window.renderCounters = function renderCounters() {
+        if (window.__countersLocked) return; // entrance animation is writing to the element
+        pokeCountElement.textContent = pokeCount === null
+            ? (counterUnavailable ? 'Pokes unavailable' : 'Loading pokes…')
+            : `${formatCount(pokeCount)} ${pokeCount === 1 ? 'poke' : 'pokes'}`;
+    };
+
+    function applyServerState(data) {
+        if (!Number.isSafeInteger(data.pokes) || data.pokes < 0) {
+            throw new Error('Counter server returned an invalid poke total.');
+        }
+        pokeCount = data.pokes;
+        window.renderCounters();
+    }
+
+    async function callApi(action) {
+        if (!API_URL || API_URL.startsWith('PASTE_')) throw new Error('API_URL is not configured.');
+        // No custom headers => "simple" request, so no CORS preflight (Apps Script can't answer one).
+        const res = await fetch(API_URL, {
+            method: 'POST',
+            body: JSON.stringify({ action, visitorId })
+        });
+        if (!res.ok) throw new Error(`Counter server returned ${res.status}.`);
+        const data = await res.json();
+        if (!data.ok) throw new Error(data.error || 'Counter server error.');
+        return data;
+    }
+
+    window.renderCounters();
+
+    // Load the shared total. Never substitute a count saved in this browser.
+    pokeButton.disabled = true;
+    (async () => {
+        try {
+            applyServerState(await callApi('get'));
+        } catch (error) {
+            console.error('Unable to load the portfolio counters:', error);
+            counterUnavailable = true;
+            window.renderCounters();
+            showCounterStatus('Counters offline.');
+        } finally {
+            pokeButton.disabled = false;
+        }
+    })();
+
+    pokeButton.addEventListener('click', async () => {
+        if (pokeButton.disabled) return;
+        pokeButton.disabled = true;
+        showCounterStatus('Sending poke…');
+        pokeButton.classList.remove('is-poked');
+        void pokeButton.offsetWidth;
+        pokeButton.classList.add('is-poked');
+        window.clearTimeout(counterStatusTimer);
+
+        try {
+            applyServerState(await callApi('poke'));
+            showCounterStatus('Thanks for the poke!');
+            counterStatusTimer = window.setTimeout(() => showCounterStatus(''), 1200);
+        } catch (error) {
+            console.error('Unable to save the portfolio poke:', error);
+            showCounterStatus('Could not save your poke. Try again later.');
+            counterStatusTimer = window.setTimeout(() => showCounterStatus(''), 3000);
+        } finally {
+            pokeButton.disabled = false;
+            pokeButton.classList.remove('is-poked');
+        }
+    });
+
     // 0. Avatar image lightbox
     const avatarTrigger = document.getElementById('avatar-trigger');
     const avatar = document.getElementById('profile-avatar');
@@ -338,9 +444,40 @@ document.addEventListener('DOMContentLoaded', () => {
             if (activeKind === 'videos') {
                 el = document.createElement('video');
                 el.controls = true;
-                el.autoplay = true;
                 el.playsInline = true;
-                el.src = src;
+                el.preload = 'auto';
+                el.muted = false;          // make sure sound is on
+                el.defaultMuted = false;
+                el.volume = 1;
+
+                // Explicit MP4 source (H.264 video + AAC audio plays everywhere)
+                const source = document.createElement('source');
+                source.src = src;
+                source.type = 'video/mp4';
+                el.appendChild(source);
+
+                // Started from the user's click, so playing with sound is allowed.
+                // If a browser still blocks it, the controls stay visible to press play.
+                el.addEventListener('loadeddata', () => {
+                    const p = el.play();
+                    if (p && p.catch) p.catch(() => { });
+                }, { once: true });
+
+                // Warn if the file really has no audio track
+                el.addEventListener('playing', () => {
+                    window.setTimeout(() => {
+                        const noAudio =
+                            el.mozHasAudio === false ||
+                            (typeof el.webkitAudioDecodedByteCount === 'number' && el.webkitAudioDecodedByteCount === 0) ||
+                            (el.audioTracks && el.audioTracks.length === 0);
+                        if (noAudio && !viewerStage.querySelector('.viewer-note')) {
+                            const note = document.createElement('p');
+                            note.className = 'viewer-note font-mono';
+                            note.textContent = 'This MP4 has no audio track.';
+                            viewerStage.appendChild(note);
+                        }
+                    }, 1200);
+                }, { once: true });
             } else {
                 el = document.createElement('img');
                 el.src = src;
@@ -363,7 +500,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         function closeViewer() {
             const video = viewerStage.querySelector('video');
-            if (video) { video.pause(); video.removeAttribute('src'); video.load(); }
+            if (video) { video.pause(); video.querySelectorAll('source').forEach((x) => x.remove()); video.removeAttribute('src'); video.load(); }
             hideModal(viewer);
             if (viewerTrigger) viewerTrigger.focus();
         }
@@ -403,5 +540,58 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+
+    // Videos button: still a <button> (keeps the entrance animation identical); it now opens
+    // the Videos view inside this page instead of navigating to gallery.html.
+    document.querySelectorAll('[data-view-href]').forEach((btn) => {
+        const view = btn.dataset.viewHref;
+        const url = `${location.pathname}${location.search}#${view}`;
+        btn.addEventListener('click', (event) => {
+            if (event.ctrlKey || event.metaKey) window.open(url, '_blank', 'noopener');
+            else window.location.hash = view;
+        });
+        btn.addEventListener('auxclick', (event) => {
+            if (event.button === 1) window.open(url, '_blank', 'noopener');
+        });
+    });
+
+    // 5. Views (single page): home / #videos / #interactive. Hash-routed, so the back button works.
+    const VIEWS = {
+        home: document.getElementById('view-home'),
+        videos: document.getElementById('view-videos'),
+        interactive: document.getElementById('view-interactive')
+    };
+    const VIEW_TITLES = {
+        home: 'kaynekaido99.dev // Portfolio',
+        videos: 'Videos // kaynekaido99.dev',
+        interactive: 'Interactive Credentials // kaynekaido99.dev'
+    };
+    let currentView = null;
+
+    function hashId() {
+        try { return decodeURIComponent(location.hash.slice(1)); } catch (e) { return ''; }
+    }
+    function viewFromHash() {
+        const id = hashId();
+        return (id === 'videos' || id === 'interactive') ? id : 'home';
+    }
+    function showView(name) {
+        const changed = name !== currentView;
+        if (changed) {
+            Object.keys(VIEWS).forEach((k) => { if (VIEWS[k]) VIEWS[k].hidden = k !== name; });
+            document.title = VIEW_TITLES[name];
+            currentView = name;
+            window.dispatchEvent(new CustomEvent('viewchange', { detail: { view: name } }));
+        }
+        if (!changed) return; // same view: the browser already handles #section scrolling
+        const target = name === 'home' && hashId() ? document.getElementById(hashId()) : null;
+        if (target) target.scrollIntoView({ block: 'start', behavior: 'instant' });
+        else window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    }
+
+    const firstView = viewFromHash();
+    if (firstView === 'home') currentView = 'home';
+    else setTimeout(() => showView(firstView), 0); // after entrance.js has measured the home page
+    window.addEventListener('hashchange', () => showView(viewFromHash()));
 
 });
