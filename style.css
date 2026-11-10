@@ -536,3 +536,43 @@ html::-webkit-scrollbar-thumb:hover {
     background: #22d3ee;
     box-shadow: 0 0 15px #22d3ee;
 }
+/* ---------- Resume modal ---------- */
+.resume-panel {
+    display: flex;
+    flex-direction: column;
+    max-width: 48rem;
+    height: min(88vh, 60rem);
+    overflow: hidden;
+}
+
+.resume-stage {
+    position: relative;
+    flex: 1;
+    min-height: 0;
+    background: #18181b;
+}
+
+.resume-stage iframe {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    background: #fff;
+}
+
+.resume-fallback {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    text-align: center;
+}
+
+@media (max-width: 480px) {
+    #resume-download {
+        padding: 0.4rem 0.55rem;
+    }
+}

@@ -15,34 +15,34 @@
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
-    tailwind.config = {
-      darkMode: 'class',
-      theme: {
-        extend: {
-          colors: {
-            brand: {
-              50: '#f0f9ff',
-              400: '#38bdf8',
-              500: '#06b6d4',
-              600: '#0284c7',
-              900: '#0f172a',
-            },
-            darkBg: '#0d1117',
-            cardBg: 'rgba(22, 27, 34, 0.6)',
-          },
-          animation: {
-            'glow-pulse': 'glowPulse 3s infinite alternate',
-          },
-          keyframes: {
-            glowPulse: {
-              '0%': { boxShadow: '0 0 15px rgba(56, 189, 248, 0.1)' },
-              '100%': { boxShadow: '0 0 30px rgba(56, 189, 248, 0.3)' }
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0f9ff',
+                            400: '#38bdf8',
+                            500: '#06b6d4',
+                            600: '#0284c7',
+                            900: '#0f172a',
+                        },
+                        darkBg: '#0d1117',
+                        cardBg: 'rgba(22, 27, 34, 0.6)',
+                    },
+                    animation: {
+                        'glow-pulse': 'glowPulse 3s infinite alternate',
+                    },
+                    keyframes: {
+                        glowPulse: {
+                            '0%': { boxShadow: '0 0 15px rgba(56, 189, 248, 0.1)' },
+                            '100%': { boxShadow: '0 0 30px rgba(56, 189, 248, 0.3)' }
+                        }
+                    }
+                }
             }
-          }
         }
-      }
-    }
-  </script>
+    </script>
     <!-- Phosphor Icons (credentials view) -->
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
     <!-- Entrance animation: hide page until start states are set (JS only) -->
@@ -58,46 +58,45 @@
     <link rel="stylesheet" href="gallery.css">
     <!-- Credentials marquee styles -->
     <style>
-    /* Gradient Masks for Edge Fading */
-    .marquee-fade-mask {
-      mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
-      -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
-    }
+        /* Gradient Masks for Edge Fading */
+        .marquee-fade-mask {
+            mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+        }
 
-    /* Glassmorphism Badge Cards */
-    .glass-badge {
-      background: rgba(22, 27, 34, 0.75);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    }
+        /* Glassmorphism Badge Cards */
+        .glass-badge {
+            background: rgba(22, 27, 34, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
 
-    .glass-badge:hover {
-      border-color: rgba(56, 189, 248, 0.6);
-      transform: translateY(-4px) scale(1.02);
+        .glass-badge:hover {
+            border-color: rgba(56, 189, 248, 0.6);
+            transform: translateY(-4px) scale(1.02);
 
-    }
+        }
 
-    /* Marquee Track positioning */
-    .marquee-track {
-      display: flex;
-      width: max-content;
-      padding-top: 10px;
-      will-change: transform;
-    }
+        /* Marquee Track positioning */
+        .marquee-track {
+            display: flex;
+            width: max-content;
+            padding-top: 10px;
+            will-change: transform;
+        }
 
-    /* Pause marquee when hovered */
-    .marquee-container.paused .marquee-track {
-      animation-play-state: paused !important;
-    }
+        /* Pause marquee when hovered */
+        .marquee-container.paused .marquee-track {
+            animation-play-state: paused !important;
+        }
 
-    /* Range slider custom styling */
-    input[type=range] {
-      accent-color: #38bdf8;
-    }
-
-  </style>
+        /* Range slider custom styling */
+        input[type=range] {
+            accent-color: #38bdf8;
+        }
+    </style>
     <!-- Google Fonts -->
     <link
         href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600;700&display=swap"
@@ -162,8 +161,13 @@
                 <div class="relative z-10">
                     <h1 class="text-4xl font-bold tracking-tight text-white flex items-center gap-2">
                         Bokie Porteza
-                        <svg class="w-5 h-5 text-sky-400 inline" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z" />
+                        <svg class="w-6 h-6 inline shrink-0" viewBox="0 0 24 24" role="img" aria-label="Verified"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <title>Verified</title>
+                            <path fill="#0866FF"
+                                d="M12.00 0.90 L12.72 1.04 L13.39 1.44 L13.99 2.00 L14.52 2.58 L15.03 3.08 L15.56 3.41 L16.17 3.55 L16.88 3.56 L17.67 3.52 L18.48 3.55 L19.24 3.75 L19.85 4.15 L20.25 4.76 L20.45 5.52 L20.48 6.33 L20.44 7.12 L20.45 7.83 L20.59 8.44 L20.92 8.97 L21.42 9.48 L22.00 10.01 L22.56 10.61 L22.96 11.28 L23.10 12.00 L22.96 12.72 L22.56 13.39 L22.00 13.99 L21.42 14.52 L20.92 15.03 L20.59 15.56 L20.45 16.17 L20.44 16.87 L20.48 17.67 L20.45 18.48 L20.25 19.24 L19.85 19.85 L19.24 20.25 L18.48 20.45 L17.67 20.48 L16.88 20.44 L16.17 20.45 L15.56 20.59 L15.03 20.92 L14.52 21.42 L13.99 22.00 L13.39 22.56 L12.72 22.96 L12.00 23.10 L11.28 22.96 L10.61 22.56 L10.01 22.00 L9.48 21.42 L8.97 20.92 L8.44 20.59 L7.83 20.45 L7.13 20.44 L6.33 20.48 L5.52 20.45 L4.76 20.25 L4.15 19.85 L3.75 19.24 L3.55 18.48 L3.52 17.67 L3.56 16.88 L3.55 16.17 L3.41 15.56 L3.08 15.03 L2.58 14.52 L2.00 13.99 L1.44 13.39 L1.04 12.72 L0.90 12.00 L1.04 11.28 L1.44 10.61 L2.00 10.01 L2.58 9.48 L3.08 8.97 L3.41 8.44 L3.55 7.83 L3.56 7.12 L3.52 6.33 L3.55 5.52 L3.75 4.76 L4.15 4.15 L4.76 3.75 L5.52 3.55 L6.33 3.52 L7.12 3.56 L7.83 3.55 L8.44 3.41 L8.97 3.08 L9.48 2.58 L10.01 2.00 L10.61 1.44 L11.28 1.04Z" />
+                            <path d="M7.6 12.4l3 3 5.8-6.2" fill="none" stroke="#fff" stroke-width="2.3"
+                                stroke-linecap="round" stroke-linejoin="round" />
                         </svg>
                     </h1>
                     <p class="text-zinc-400 text-sm mt-1">Real, working software & interactive web architectures.</p>
@@ -217,14 +221,15 @@
                         </svg>
                         <span>Loading local time...</span>
                     </div>
-                    <div class="flex items-center gap-3 text-zinc-300">
-                        <svg class="w-4 h-4 text-zinc-500 shrink-0" fill="none" stroke="currentColor" stroke-width="2"
-                            viewBox="0 0 24 24">
+                    <button type="button" id="resume-trigger" aria-haspopup="dialog" aria-controls="resume-modal"
+                        class="flex items-center gap-3 w-full text-left text-zinc-300 hover:text-white transition group cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-400 rounded">
+                        <svg class="w-4 h-4 text-zinc-500 shrink-0 group-hover:text-sky-400 transition" fill="none"
+                            stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round"
                                 d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
                         </svg>
-                        <span>Resume, one page</span>
-                    </div>
+                        <span class="group-hover:underline">Resume</span>
+                    </button>
                 </div>
             </div>
             <!-- Action Buttons Bar -->
@@ -745,198 +750,202 @@
 
     <!-- ===== VIEW: Interactive Credentials (was interactive.html) ===== -->
     <div id="view-credentials" class="max-w-6xl w-full mx-auto px-4 py-8 flex-grow space-y-6" hidden>
-  <!-- Title bar -->
-  <div
-    class="px-4 sm:px-6 py-3 border-b border-zinc-800/60 flex flex-wrap justify-between items-center gap-x-3 gap-y-2 text-xs text-zinc-500 font-mono">
-    <a href="#projects"
-      class="inline-flex items-center gap-1.5 hover:text-zinc-200 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-400 rounded">
-      <span aria-hidden="true">&larr;</span> Back to projects
-    </a>
-  </div>
-  <!-- Header & Title -->
-  <div class="bg-[#121215] border border-zinc-800/80 rounded-xl p-6">
-    <div
-      class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-gray-800 pb-6">
-      <div>
+        <!-- Title bar -->
         <div
-          class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-500/10 border border-sky-500/20 text-sky-400 text-xs font-semibold uppercase tracking-wider mb-2">
-          <i class="ph-bold ph-seal-check text-sm"></i> Credentials Showcase
+            class="px-4 sm:px-6 py-3 border-b border-zinc-800/60 flex flex-wrap justify-between items-center gap-x-3 gap-y-2 text-xs text-zinc-500 font-mono">
+            <a href="#profile"
+                class="inline-flex items-center gap-1.5 hover:text-zinc-200 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-400 rounded">
+                <span aria-hidden="true">&larr;</span> Back to projects
+            </a>
         </div>
-        <h1 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-          Interactive Badge
-        </h1>
-        <p class="text-gray-400 text-sm mt-1">
-          Smooth infinite sliding track for certifications, badges, and skill credentials with interactive controls.
-        </p>
-      </div>
-
-      <!-- Quick Actions -->
-      <div class="flex items-center gap-3">
-        <button id="togglePlayBtn" onclick="togglePlayPause()"
-          class="flex items-center gap-2 px-4 py-2 rounded-xl bg-gray-800 hover:bg-gray-700 text-white font-medium text-sm transition-all border border-gray-700 active:scale-95 shadow-lg">
-          <i id="playIcon" class="ph-bold ph-pause text-sky-400"></i>
-          <span id="playText">Pause</span>
-        </button>
-        <button onclick="toggleDirection()"
-          class="flex items-center gap-2 px-4 py-2 rounded-xl bg-gray-800 hover:bg-gray-700 text-white font-medium text-sm transition-all border border-gray-700 active:scale-95 shadow-lg">
-          <i class="ph-bold ph-arrows-left-right text-sky-400"></i>
-          <span>Reverse</span>
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Main Marquee Display Section -->
-  <div class="space-y-6">
-
-    <div class="mb-3 flex items-center justify-between text-xs text-gray-400">
-      <span class="flex items-center gap-1.5"><i class="ph-bold ph-hand-pointing text-sky-400 text-sm"></i> Hover over
-        cards to pause & inspect</span>
-      <span id="badgeCounter" class="bg-gray-800 px-2.5 py-1 rounded-md text-gray-300 font-mono">Total Badges: 8</span>
-    </div>
-
-    <!-- Marquee Wrapper -->
-    <div class="bg-[#121215] border border-zinc-800/80 rounded-xl p-6">
-
-      <!-- Fade Mask Wrapper -->
-      <div id="marqueeContainer" class="marquee-container marquee-fade-mask overflow-hidden w-full relative">
-        <div id="marqueeTrack" class="marquee-track flex gap-6 items-center">
-          <!-- Dynamically Rendered by JS -->
-        </div>
-      </div>
-
-    </div>
-
-    <!-- Stats & Live Status Pill -->
-    <div class="mt-6 flex flex-wrap items-center justify-between gap-4">
-      <div class="flex items-center gap-3">
-        <div
-          class="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-900 border border-gray-800 text-xs font-mono">
-          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-          <span class="text-gray-300">STATUS:</span>
-          <span id="statusLabel" class="text-emerald-400 font-bold">RUNNING</span>
-        </div>
-        <div
-          class="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-900 border border-gray-800 text-xs font-mono">
-          <span class="text-gray-300">SPEED:</span>
-          <span id="speedValueLabel" class="text-sky-400 font-bold">30s</span>
-        </div>
-        <div
-          class="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-900 border border-gray-800 text-xs font-mono">
-          <span class="text-gray-300">DIR:</span>
-          <span id="dirValueLabel" class="text-sky-400 font-bold">NORMAL</span>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Interactive Control Panel & Badge Add Form -->
-  <div>
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-
-      <!-- Speed & Track Controls -->
-      <div class="bg-[#121215] border border-zinc-800/80 rounded-xl p-6">
-        <h3 class="text-white font-semibold text-base mb-4 flex items-center gap-2">
-          <i class="ph-bold ph-sliders-horizontal text-sky-400"></i> Marquee Controls
-        </h3>
-
-        <!-- Speed Slider -->
-        <div class="mb-5">
-          <div class="flex justify-between items-center mb-2">
-            <label class="text-xs font-medium text-gray-300">Scroll Duration (Speed)</label>
-            <span id="sliderValDisplay" class="text-xs font-mono text-sky-400 font-bold">30s</span>
-          </div>
-          <input type="range" id="speedSlider" min="5" max="60" value="30" step="1" oninput="updateSpeed(this.value)"
-            class="w-full h-2 bg-gray-800 rounded-lg appearance-none cursor-pointer focus:outline-none">
-          <div class="flex justify-between text-[10px] text-gray-500 font-mono mt-1">
-            <span>Fast (5s)</span>
-            <span>Slow (60s)</span>
-          </div>
-        </div>
-
-        <!-- Pause on Hover Toggle -->
-        <div class="flex items-center justify-between py-2 border-t border-gray-800">
-          <div>
-            <span class="text-xs font-medium text-gray-200 block">Pause on Hover</span>
-            <span class="text-[11px] text-gray-500 block">Freeze animation when inspecting</span>
-          </div>
-          <label class="relative inline-flex items-center cursor-pointer">
-            <input type="checkbox" id="pauseHoverToggle" checked onchange="togglePauseOnHoverSetting(this.checked)"
-              class="sr-only peer">
+        <!-- Header & Title -->
+        <div class="bg-[#121215] border border-zinc-800/80 rounded-xl p-6">
             <div
-              class="w-11 h-6 bg-gray-800 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-sky-500">
+                class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-gray-800 pb-6">
+                <div>
+                    <div
+                        class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-500/10 border border-sky-500/20 text-sky-400 text-xs font-semibold uppercase tracking-wider mb-2">
+                        <i class="ph-bold ph-seal-check text-sm"></i> Credentials Showcase
+                    </div>
+                    <h1 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+                        Interactive Badge
+                    </h1>
+                    <p class="text-gray-400 text-sm mt-1">
+                        Smooth infinite sliding track for certifications, badges, and skill credentials with interactive
+                        controls.
+                    </p>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="flex items-center gap-3">
+                    <button id="togglePlayBtn" onclick="togglePlayPause()"
+                        class="flex items-center gap-2 px-4 py-2 rounded-xl bg-gray-800 hover:bg-gray-700 text-white font-medium text-sm transition-all border border-gray-700 active:scale-95 shadow-lg">
+                        <i id="playIcon" class="ph-bold ph-pause text-sky-400"></i>
+                        <span id="playText">Pause</span>
+                    </button>
+                    <button onclick="toggleDirection()"
+                        class="flex items-center gap-2 px-4 py-2 rounded-xl bg-gray-800 hover:bg-gray-700 text-white font-medium text-sm transition-all border border-gray-700 active:scale-95 shadow-lg">
+                        <i class="ph-bold ph-arrows-left-right text-sky-400"></i>
+                        <span>Reverse</span>
+                    </button>
+                </div>
             </div>
-          </label>
         </div>
-      </div>
 
-      <!-- Add Custom Badge Form -->
-      <div class="bg-[#121215] border border-zinc-800/80 rounded-xl p-6">
-        <h3 class="text-white font-semibold text-base mb-4 flex items-center gap-2">
-          <i class="ph-bold ph-plus-circle text-sky-400"></i> Add New Credential Badge
-        </h3>
+        <!-- Main Marquee Display Section -->
+        <div class="space-y-6">
 
-        <form onsubmit="handleBadgeSubmit(event)" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div>
-            <label class="block text-xs font-medium text-gray-300 mb-1">Badge Title</label>
-            <input type="text" id="badgeTitleInput" placeholder="e.g. AWS Solutions Architect" required
-              class="w-full px-3 py-2 bg-gray-800 border border-gray-700 rounded-xl text-white text-sm focus:outline-none focus:border-sky-500 transition-colors">
-          </div>
+            <div class="mb-3 flex items-center justify-between text-xs text-gray-400">
+                <span class="flex items-center gap-1.5"><i class="ph-bold ph-hand-pointing text-sky-400 text-sm"></i>
+                    Hover over
+                    cards to pause & inspect</span>
+                <span id="badgeCounter" class="bg-gray-800 px-2.5 py-1 rounded-md text-gray-300 font-mono">Total Badges:
+                    8</span>
+            </div>
 
-          <div>
-            <label class="block text-xs font-medium text-gray-300 mb-1">Issuer / Platform</label>
-            <input type="text" id="badgeIssuerInput" placeholder="e.g. Amazon Web Services" required
-              class="w-full px-3 py-2 bg-gray-800 border border-gray-700 rounded-xl text-white text-sm focus:outline-none focus:border-sky-500 transition-colors">
-          </div>
+            <!-- Marquee Wrapper -->
+            <div class="bg-[#121215] border border-zinc-800/80 rounded-xl p-6">
 
-          <div>
-            <label class="block text-xs font-medium text-gray-300 mb-1">Select Icon</label>
-            <select id="badgeIconSelect"
-              class="w-full px-3 py-2 bg-gray-800 border border-gray-700 rounded-xl text-white text-sm focus:outline-none focus:border-sky-500 transition-colors">
-              <option value="ph-cpu">CPU / Hardware</option>
-              <option value="ph-cloud font-bold">Cloud Infrastructure</option>
-              <option value="ph-shield-check">Security / Cyber</option>
-              <option value="ph-code font-bold">Software Development</option>
-              <option value="ph-brain">AI / Data Science</option>
-              <option value="ph-certificate">Certification Seal</option>
-              <option value="ph-trophy">Award / Recognition</option>
-            </select>
-          </div>
+                <!-- Fade Mask Wrapper -->
+                <div id="marqueeContainer" class="marquee-container marquee-fade-mask overflow-hidden w-full relative">
+                    <div id="marqueeTrack" class="marquee-track flex gap-6 items-center">
+                        <!-- Dynamically Rendered by JS -->
+                    </div>
+                </div>
 
-          <div>
-            <label class="block text-xs font-medium text-gray-300 mb-1">Accent Glow Color</label>
-            <select id="badgeColorSelect"
-              class="w-full px-3 py-2 bg-gray-800 border border-gray-700 rounded-xl text-white text-sm focus:outline-none focus:border-sky-500 transition-colors">
-              <option value="sky">Cyan / Sky Blue</option>
-              <option value="emerald">Emerald Green</option>
-              <option value="purple">Purple / Violet</option>
-              <option value="amber">Amber Gold</option>
-              <option value="rose">Rose Red</option>
-            </select>
-          </div>
+            </div>
 
-          <div class="sm:col-span-2 flex justify-end gap-3 mt-2">
-            <button type="button" onclick="resetDefaultBadges()"
-              class="px-4 py-2 rounded-xl bg-gray-800 hover:bg-gray-700 text-gray-300 font-medium text-xs transition-colors border border-gray-700">
-              Reset Defaults
-            </button>
-            <button type="submit"
-              class="px-5 py-2 rounded-xl bg-sky-500 hover:bg-sky-400 text-gray-950 font-bold text-xs transition-colors flex items-center gap-2 shadow-lg shadow-sky-500/20 active:scale-95">
-              Add Badge to Marquee
-            </button>
-          </div>
-        </form>
-      </div>
+            <!-- Stats & Live Status Pill -->
+            <div class="mt-6 flex flex-wrap items-center justify-between gap-4">
+                <div class="flex items-center gap-3">
+                    <div
+                        class="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-900 border border-gray-800 text-xs font-mono">
+                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+                        <span class="text-gray-300">STATUS:</span>
+                        <span id="statusLabel" class="text-emerald-400 font-bold">RUNNING</span>
+                    </div>
+                    <div
+                        class="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-900 border border-gray-800 text-xs font-mono">
+                        <span class="text-gray-300">SPEED:</span>
+                        <span id="speedValueLabel" class="text-sky-400 font-bold">30s</span>
+                    </div>
+                    <div
+                        class="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-900 border border-gray-800 text-xs font-mono">
+                        <span class="text-gray-300">DIR:</span>
+                        <span id="dirValueLabel" class="text-sky-400 font-bold">NORMAL</span>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-    </div>
-  </div>
+        <!-- Interactive Control Panel & Badge Add Form -->
+        <div>
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
 
-  <!-- Notification Toast -->
-  <div id="toast"
-    class="fixed bottom-6 right-6 px-4 py-3 rounded-xl bg-sky-500 text-gray-950 font-bold text-xs shadow-2xl flex items-center gap-2 transform translate-y-20 opacity-0 transition-all duration-300 z-50">
-    <i class="ph-bold ph-check-circle text-base"></i>
-    <span id="toastMsg">Badge added successfully!</span>
-  </div>
+                <!-- Speed & Track Controls -->
+                <div class="bg-[#121215] border border-zinc-800/80 rounded-xl p-6">
+                    <h3 class="text-white font-semibold text-base mb-4 flex items-center gap-2">
+                        <i class="ph-bold ph-sliders-horizontal text-sky-400"></i> Marquee Controls
+                    </h3>
+
+                    <!-- Speed Slider -->
+                    <div class="mb-5">
+                        <div class="flex justify-between items-center mb-2">
+                            <label class="text-xs font-medium text-gray-300">Scroll Duration (Speed)</label>
+                            <span id="sliderValDisplay" class="text-xs font-mono text-sky-400 font-bold">30s</span>
+                        </div>
+                        <input type="range" id="speedSlider" min="5" max="60" value="30" step="1"
+                            oninput="updateSpeed(this.value)"
+                            class="w-full h-2 bg-gray-800 rounded-lg appearance-none cursor-pointer focus:outline-none">
+                        <div class="flex justify-between text-[10px] text-gray-500 font-mono mt-1">
+                            <span>Fast (5s)</span>
+                            <span>Slow (60s)</span>
+                        </div>
+                    </div>
+
+                    <!-- Pause on Hover Toggle -->
+                    <div class="flex items-center justify-between py-2 border-t border-gray-800">
+                        <div>
+                            <span class="text-xs font-medium text-gray-200 block">Pause on Hover</span>
+                            <span class="text-[11px] text-gray-500 block">Freeze animation when inspecting</span>
+                        </div>
+                        <label class="relative inline-flex items-center cursor-pointer">
+                            <input type="checkbox" id="pauseHoverToggle" checked
+                                onchange="togglePauseOnHoverSetting(this.checked)" class="sr-only peer">
+                            <div
+                                class="w-11 h-6 bg-gray-800 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-sky-500">
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Add Custom Badge Form -->
+                <div class="bg-[#121215] border border-zinc-800/80 rounded-xl p-6">
+                    <h3 class="text-white font-semibold text-base mb-4 flex items-center gap-2">
+                        <i class="ph-bold ph-plus-circle text-sky-400"></i> Add New Credential Badge
+                    </h3>
+
+                    <form onsubmit="handleBadgeSubmit(event)" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-medium text-gray-300 mb-1">Badge Title</label>
+                            <input type="text" id="badgeTitleInput" placeholder="e.g. AWS Solutions Architect" required
+                                class="w-full px-3 py-2 bg-gray-800 border border-gray-700 rounded-xl text-white text-sm focus:outline-none focus:border-sky-500 transition-colors">
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-medium text-gray-300 mb-1">Issuer / Platform</label>
+                            <input type="text" id="badgeIssuerInput" placeholder="e.g. Amazon Web Services" required
+                                class="w-full px-3 py-2 bg-gray-800 border border-gray-700 rounded-xl text-white text-sm focus:outline-none focus:border-sky-500 transition-colors">
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-medium text-gray-300 mb-1">Select Icon</label>
+                            <select id="badgeIconSelect"
+                                class="w-full px-3 py-2 bg-gray-800 border border-gray-700 rounded-xl text-white text-sm focus:outline-none focus:border-sky-500 transition-colors">
+                                <option value="ph-cpu">CPU / Hardware</option>
+                                <option value="ph-cloud font-bold">Cloud Infrastructure</option>
+                                <option value="ph-shield-check">Security / Cyber</option>
+                                <option value="ph-code font-bold">Software Development</option>
+                                <option value="ph-brain">AI / Data Science</option>
+                                <option value="ph-certificate">Certification Seal</option>
+                                <option value="ph-trophy">Award / Recognition</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-medium text-gray-300 mb-1">Accent Glow Color</label>
+                            <select id="badgeColorSelect"
+                                class="w-full px-3 py-2 bg-gray-800 border border-gray-700 rounded-xl text-white text-sm focus:outline-none focus:border-sky-500 transition-colors">
+                                <option value="sky">Cyan / Sky Blue</option>
+                                <option value="emerald">Emerald Green</option>
+                                <option value="purple">Purple / Violet</option>
+                                <option value="amber">Amber Gold</option>
+                                <option value="rose">Rose Red</option>
+                            </select>
+                        </div>
+
+                        <div class="sm:col-span-2 flex justify-end gap-3 mt-2">
+                            <button type="button" onclick="resetDefaultBadges()"
+                                class="px-4 py-2 rounded-xl bg-gray-800 hover:bg-gray-700 text-gray-300 font-medium text-xs transition-colors border border-gray-700">
+                                Reset Defaults
+                            </button>
+                            <button type="submit"
+                                class="px-5 py-2 rounded-xl bg-sky-500 hover:bg-sky-400 text-gray-950 font-bold text-xs transition-colors flex items-center gap-2 shadow-lg shadow-sky-500/20 active:scale-95">
+                                Add Badge to Marquee
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Notification Toast -->
+        <div id="toast"
+            class="fixed bottom-6 right-6 px-4 py-3 rounded-xl bg-sky-500 text-gray-950 font-bold text-xs shadow-2xl flex items-center gap-2 transform translate-y-20 opacity-0 transition-all duration-300 z-50">
+            <i class="ph-bold ph-check-circle text-base"></i>
+            <span id="toastMsg">Badge added successfully!</span>
+        </div>
     </div>
 
     <!-- Footer -->
@@ -1005,6 +1014,29 @@
         </div>
     </div>
 
+    <!-- Resume modal -->
+    <div id="resume-modal" class="media-modal" role="dialog" aria-modal="true" aria-labelledby="resume-title"
+        aria-hidden="true">
+        <div class="media-panel resume-panel">
+            <div class="media-panel-header">
+                <h2 id="resume-title" class="text-xs font-mono font-semibold uppercase tracking-wider text-zinc-400">
+                    Resume</h2>
+                <div class="flex items-center gap-3">
+                    <a id="resume-download" href="Resume/My%20Resume.pdf" download="My Resume.pdf" class="player-btn">
+                        <i class="ph ph-download-simple" aria-hidden="true"></i> Download Resume</a>
+                    <button id="resume-close" class="media-close" type="button"
+                        aria-label="Close resume">&times;</button>
+                </div>
+            </div>
+            <div class="resume-stage">
+                <p class="resume-fallback font-mono text-xs text-zinc-500">
+                    Can&rsquo;t preview the PDF here? Use <span class="text-sky-300">Download Resume</span> above.</p>
+                <iframe id="resume-frame" title="Resume PDF preview"
+                    data-src="Resume/My%20Resume.pdf#view=FitH"></iframe>
+            </div>
+        </div>
+    </div>
+
     <!-- Single media viewer (opens when a photo or video is clicked) -->
     <div id="media-viewer" class="media-modal media-viewer" role="dialog" aria-modal="true" aria-label="Media viewer"
         aria-hidden="true">
@@ -1051,43 +1083,44 @@
     <script src="app.js?v=5"></script>
     <script src="entrance.js?v=5"></script>
     <script src="gallery.js"></script>
+    <script src="resume.js"></script>
 
     <!-- Credentials marquee logic (was in interactive.html) -->
     <script>
-    // Initial Credentials Data
-    const defaultCredentials = [
-      { id: 1, title: 'PMP® Certification', issuer: 'PMI Institute', icon: 'ph-certificate', color: 'emerald' },
-      { id: 2, title: 'Cloud Architect', issuer: 'Google Cloud', icon: 'ph-cloud', color: 'sky' },
-      { id: 3, title: 'Deep Learning Specialization', issuer: 'NVIDIA Academy', icon: 'ph-cpu', color: 'purple' },
-      { id: 4, title: 'LLM & Prompt Eng', issuer: 'OpenAI / Claude', icon: 'ph-brain', color: 'amber' },
-      { id: 5, title: 'Cyber Security Lead', issuer: 'CISSP Certified', icon: 'ph-shield-check', color: 'rose' },
-      { id: 6, title: 'Full-Stack Developer', issuer: 'Meta Frontend', icon: 'ph-code', color: 'sky' },
-      { id: 7, title: 'DevOps Professional', issuer: 'AWS Certified', icon: 'ph-cloud', color: 'purple' },
-      { id: 8, title: 'Agile Scrum Master', issuer: 'Scrum.org', icon: 'ph-trophy', color: 'emerald' }
-    ];
+        // Initial Credentials Data
+        const defaultCredentials = [
+            { id: 1, title: 'PMP® Certification', issuer: 'PMI Institute', icon: 'ph-certificate', color: 'emerald' },
+            { id: 2, title: 'Cloud Architect', issuer: 'Google Cloud', icon: 'ph-cloud', color: 'sky' },
+            { id: 3, title: 'Deep Learning Specialization', issuer: 'NVIDIA Academy', icon: 'ph-cpu', color: 'purple' },
+            { id: 4, title: 'LLM & Prompt Eng', issuer: 'OpenAI / Claude', icon: 'ph-brain', color: 'amber' },
+            { id: 5, title: 'Cyber Security Lead', issuer: 'CISSP Certified', icon: 'ph-shield-check', color: 'rose' },
+            { id: 6, title: 'Full-Stack Developer', issuer: 'Meta Frontend', icon: 'ph-code', color: 'sky' },
+            { id: 7, title: 'DevOps Professional', issuer: 'AWS Certified', icon: 'ph-cloud', color: 'purple' },
+            { id: 8, title: 'Agile Scrum Master', issuer: 'Scrum.org', icon: 'ph-trophy', color: 'emerald' }
+        ];
 
-    let credentialsList = [...defaultCredentials];
-    let scrollDuration = 30; // Seconds
-    let isReversed = false;
-    let isPlaying = true;
-    let pauseOnHover = true;
+        let credentialsList = [...defaultCredentials];
+        let scrollDuration = 30; // Seconds
+        let isReversed = false;
+        let isPlaying = true;
+        let pauseOnHover = true;
 
-    // Color Maps for Dynamic Styling
-    const colorStyles = {
-      sky: { border: 'hover:border-sky-500/50', icon: 'text-sky-400', bg: 'bg-sky-500/10', glow: 'hover:shadow-sky-500/20' },
-      emerald: { border: 'hover:border-emerald-500/50', icon: 'text-emerald-400', bg: 'bg-emerald-500/10', glow: 'hover:shadow-emerald-500/20' },
-      purple: { border: 'hover:border-purple-500/50', icon: 'text-purple-400', bg: 'bg-purple-500/10', glow: 'hover:shadow-purple-500/20' },
-      amber: { border: 'hover:border-amber-500/50', icon: 'text-amber-400', bg: 'bg-amber-500/10', glow: 'hover:shadow-amber-500/20' },
-      rose: { border: 'hover:border-rose-500/50', icon: 'text-rose-400', bg: 'bg-rose-500/10', glow: 'hover:shadow-rose-500/20' }
-    };
+        // Color Maps for Dynamic Styling
+        const colorStyles = {
+            sky: { border: 'hover:border-sky-500/50', icon: 'text-sky-400', bg: 'bg-sky-500/10', glow: 'hover:shadow-sky-500/20' },
+            emerald: { border: 'hover:border-emerald-500/50', icon: 'text-emerald-400', bg: 'bg-emerald-500/10', glow: 'hover:shadow-emerald-500/20' },
+            purple: { border: 'hover:border-purple-500/50', icon: 'text-purple-400', bg: 'bg-purple-500/10', glow: 'hover:shadow-purple-500/20' },
+            amber: { border: 'hover:border-amber-500/50', icon: 'text-amber-400', bg: 'bg-amber-500/10', glow: 'hover:shadow-amber-500/20' },
+            rose: { border: 'hover:border-rose-500/50', icon: 'text-rose-400', bg: 'bg-rose-500/10', glow: 'hover:shadow-rose-500/20' }
+        };
 
-    const marqueeTrack = document.getElementById('marqueeTrack');
-    const marqueeContainer = document.getElementById('marqueeContainer');
+        const marqueeTrack = document.getElementById('marqueeTrack');
+        const marqueeContainer = document.getElementById('marqueeContainer');
 
-    // Render Badge Card HTML
-    function createBadgeCardHTML(item) {
-      const theme = colorStyles[item.color] || colorStyles.sky;
-      return `
+        // Render Badge Card HTML
+        function createBadgeCardHTML(item) {
+            const theme = colorStyles[item.color] || colorStyles.sky;
+            return `
         <div class="glass-badge flex items-center gap-3.5 px-5 py-3.5 rounded-2xl cursor-pointer select-none group min-w-[240px] ${theme.border} ${theme.glow}" onclick="showBadgeDetails('${item.title}', '${item.issuer}')">
           <div class="w-10 h-10 rounded-xl ${theme.bg} flex items-center justify-center ${theme.icon} text-xl shrink-0 group-hover:scale-110 transition-transform">
             <i class="ph-bold ${item.icon}"></i>
@@ -1101,39 +1134,39 @@
           </div>
         </div>
       `;
-    }
+        }
 
-    // Build Marquee Track with Duplicate Items for Continuous Loop
-    function renderMarquee() {
-      // Clear track
-      marqueeTrack.innerHTML = '';
+        // Build Marquee Track with Duplicate Items for Continuous Loop
+        function renderMarquee() {
+            // Clear track
+            marqueeTrack.innerHTML = '';
 
-      // Generate items HTML
-      const itemsHTML = credentialsList.map(item => createBadgeCardHTML(item)).join('');
+            // Generate items HTML
+            const itemsHTML = credentialsList.map(item => createBadgeCardHTML(item)).join('');
 
-      // We duplicate the dataset twice to create a perfectly seamless scroll reset
-      marqueeTrack.innerHTML = itemsHTML + itemsHTML;
+            // We duplicate the dataset twice to create a perfectly seamless scroll reset
+            marqueeTrack.innerHTML = itemsHTML + itemsHTML;
 
-      // Update Marquee Dynamic CSS Keyframes / Animations
-      applyKeyframes();
+            // Update Marquee Dynamic CSS Keyframes / Animations
+            applyKeyframes();
 
-      // Update badge count
-      document.getElementById('badgeCounter').innerText = `Total Badges: ${credentialsList.length}`;
-    }
+            // Update badge count
+            document.getElementById('badgeCounter').innerText = `Total Badges: ${credentialsList.length}`;
+        }
 
-    // Inject Custom Keyframe animation based on current track width & settings
-    function applyKeyframes() {
-      // Remove existing dynamic style tag if exists
-      const existingStyle = document.getElementById('dynamicMarqueeStyle');
-      if (existingStyle) existingStyle.remove();
+        // Inject Custom Keyframe animation based on current track width & settings
+        function applyKeyframes() {
+            // Remove existing dynamic style tag if exists
+            const existingStyle = document.getElementById('dynamicMarqueeStyle');
+            if (existingStyle) existingStyle.remove();
 
-      const directionKey = isReversed ? 'marqueeReverse' : 'marqueeNormal';
-      const fromPos = isReversed ? '-50%' : '0%';
-      const toPos = isReversed ? '0%' : '-50%';
+            const directionKey = isReversed ? 'marqueeReverse' : 'marqueeNormal';
+            const fromPos = isReversed ? '-50%' : '0%';
+            const toPos = isReversed ? '0%' : '-50%';
 
-      const style = document.createElement('style');
-      style.id = 'dynamicMarqueeStyle';
-      style.innerHTML = `
+            const style = document.createElement('style');
+            style.id = 'dynamicMarqueeStyle';
+            style.innerHTML = `
         @keyframes ${directionKey} {
           0% { transform: translateX(${fromPos}); }
           100% { transform: translateX(${toPos}); }
@@ -1143,129 +1176,129 @@
           animation: ${directionKey} ${scrollDuration}s linear infinite;
         }
       `;
-      document.head.appendChild(style);
-    }
+            document.head.appendChild(style);
+        }
 
-    // Controls Logic
-    function togglePlayPause() {
-      isPlaying = !isPlaying;
-      const playIcon = document.getElementById('playIcon');
-      const playText = document.getElementById('playText');
-      const statusLabel = document.getElementById('statusLabel');
+        // Controls Logic
+        function togglePlayPause() {
+            isPlaying = !isPlaying;
+            const playIcon = document.getElementById('playIcon');
+            const playText = document.getElementById('playText');
+            const statusLabel = document.getElementById('statusLabel');
 
-      if (isPlaying) {
-        marqueeContainer.classList.remove('paused');
-        playIcon.className = 'ph-bold ph-pause text-sky-400';
-        playText.innerText = 'Pause';
-        statusLabel.innerText = 'RUNNING';
-        statusLabel.className = 'text-emerald-400 font-bold';
-      } else {
-        marqueeContainer.classList.add('paused');
-        playIcon.className = 'ph-bold ph-play text-sky-400';
-        playText.innerText = 'Play';
-        statusLabel.innerText = 'PAUSED';
-        statusLabel.className = 'text-amber-400 font-bold';
-      }
-    }
+            if (isPlaying) {
+                marqueeContainer.classList.remove('paused');
+                playIcon.className = 'ph-bold ph-pause text-sky-400';
+                playText.innerText = 'Pause';
+                statusLabel.innerText = 'RUNNING';
+                statusLabel.className = 'text-emerald-400 font-bold';
+            } else {
+                marqueeContainer.classList.add('paused');
+                playIcon.className = 'ph-bold ph-play text-sky-400';
+                playText.innerText = 'Play';
+                statusLabel.innerText = 'PAUSED';
+                statusLabel.className = 'text-amber-400 font-bold';
+            }
+        }
 
-    function toggleDirection() {
-      isReversed = !isReversed;
-      document.getElementById('dirValueLabel').innerText = isReversed ? 'REVERSED' : 'NORMAL';
-      applyKeyframes();
-      showToast(isReversed ? 'Marquee direction reversed' : 'Marquee set to normal direction');
-    }
+        function toggleDirection() {
+            isReversed = !isReversed;
+            document.getElementById('dirValueLabel').innerText = isReversed ? 'REVERSED' : 'NORMAL';
+            applyKeyframes();
+            showToast(isReversed ? 'Marquee direction reversed' : 'Marquee set to normal direction');
+        }
 
-    function updateSpeed(val) {
-      scrollDuration = val;
-      document.getElementById('sliderValDisplay').innerText = `${val}s`;
-      document.getElementById('speedValueLabel').innerText = `${val}s`;
-      applyKeyframes();
-    }
+        function updateSpeed(val) {
+            scrollDuration = val;
+            document.getElementById('sliderValDisplay').innerText = `${val}s`;
+            document.getElementById('speedValueLabel').innerText = `${val}s`;
+            applyKeyframes();
+        }
 
-    function togglePauseOnHoverSetting(enabled) {
-      pauseOnHover = enabled;
-      if (pauseOnHover) {
-        marqueeContainer.addEventListener('mouseenter', handleMouseEnter);
-        marqueeContainer.addEventListener('mouseleave', handleMouseLeave);
-      } else {
-        marqueeContainer.removeEventListener('mouseenter', handleMouseEnter);
-        marqueeContainer.removeEventListener('mouseleave', handleMouseLeave);
-        if (isPlaying) marqueeContainer.classList.remove('paused');
-      }
-    }
+        function togglePauseOnHoverSetting(enabled) {
+            pauseOnHover = enabled;
+            if (pauseOnHover) {
+                marqueeContainer.addEventListener('mouseenter', handleMouseEnter);
+                marqueeContainer.addEventListener('mouseleave', handleMouseLeave);
+            } else {
+                marqueeContainer.removeEventListener('mouseenter', handleMouseEnter);
+                marqueeContainer.removeEventListener('mouseleave', handleMouseLeave);
+                if (isPlaying) marqueeContainer.classList.remove('paused');
+            }
+        }
 
-    function handleMouseEnter() {
-      if (pauseOnHover && isPlaying) {
-        marqueeContainer.classList.add('paused');
-      }
-    }
+        function handleMouseEnter() {
+            if (pauseOnHover && isPlaying) {
+                marqueeContainer.classList.add('paused');
+            }
+        }
 
-    function handleMouseLeave() {
-      if (pauseOnHover && isPlaying) {
-        marqueeContainer.classList.remove('paused');
-      }
-    }
+        function handleMouseLeave() {
+            if (pauseOnHover && isPlaying) {
+                marqueeContainer.classList.remove('paused');
+            }
+        }
 
-    // Add New Badge Form Handler
-    function handleBadgeSubmit(e) {
-      e.preventDefault();
-      const title = document.getElementById('badgeTitleInput').value.trim();
-      const issuer = document.getElementById('badgeIssuerInput').value.trim();
-      const icon = document.getElementById('badgeIconSelect').value;
-      const color = document.getElementById('badgeColorSelect').value;
+        // Add New Badge Form Handler
+        function handleBadgeSubmit(e) {
+            e.preventDefault();
+            const title = document.getElementById('badgeTitleInput').value.trim();
+            const issuer = document.getElementById('badgeIssuerInput').value.trim();
+            const icon = document.getElementById('badgeIconSelect').value;
+            const color = document.getElementById('badgeColorSelect').value;
 
-      if (!title || !issuer) return;
+            if (!title || !issuer) return;
 
-      const newBadge = {
-        id: Date.now(),
-        title,
-        issuer,
-        icon,
-        color
-      };
+            const newBadge = {
+                id: Date.now(),
+                title,
+                issuer,
+                icon,
+                color
+            };
 
-      credentialsList.push(newBadge);
-      renderMarquee();
+            credentialsList.push(newBadge);
+            renderMarquee();
 
-      // Reset Form
-      document.getElementById('badgeTitleInput').value = '';
-      document.getElementById('badgeIssuerInput').value = '';
+            // Reset Form
+            document.getElementById('badgeTitleInput').value = '';
+            document.getElementById('badgeIssuerInput').value = '';
 
-      showToast(`Added "${title}" badge!`);
-    }
+            showToast(`Added "${title}" badge!`);
+        }
 
-    function resetDefaultBadges() {
-      credentialsList = [...defaultCredentials];
-      renderMarquee();
-      showToast('Reset to default credentials');
-    }
+        function resetDefaultBadges() {
+            credentialsList = [...defaultCredentials];
+            renderMarquee();
+            showToast('Reset to default credentials');
+        }
 
-    function showBadgeDetails(title, issuer) {
-      showToast(`Selected: ${title} (${issuer})`);
-    }
+        function showBadgeDetails(title, issuer) {
+            showToast(`Selected: ${title} (${issuer})`);
+        }
 
-    function showToast(msg) {
-      const toast = document.getElementById('toast');
-      const toastMsg = document.getElementById('toastMsg');
-      toastMsg.innerText = msg;
-      toast.classList.remove('translate-y-20', 'opacity-0');
-      toast.classList.add('translate-y-0', 'opacity-100');
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            const toastMsg = document.getElementById('toastMsg');
+            toastMsg.innerText = msg;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
 
-      setTimeout(() => {
-        toast.classList.remove('translate-y-0', 'opacity-100');
-        toast.classList.add('translate-y-20', 'opacity-0');
-      }, 2500);
-    }
+            setTimeout(() => {
+                toast.classList.remove('translate-y-0', 'opacity-100');
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 2500);
+        }
 
-    // Initialization on Page Load
-    window.addEventListener('load', function () {
-      renderMarquee();
+        // Initialization on Page Load
+        window.addEventListener('load', function () {
+            renderMarquee();
 
-      // Attach initial hover listeners
-      marqueeContainer.addEventListener('mouseenter', handleMouseEnter);
-      marqueeContainer.addEventListener('mouseleave', handleMouseLeave);
-    });
-  </script>
+            // Attach initial hover listeners
+            marqueeContainer.addEventListener('mouseenter', handleMouseEnter);
+            marqueeContainer.addEventListener('mouseleave', handleMouseLeave);
+        });
+    </script>
 
     <!-- View router: #videos and #credentials swap in for the home page, everything else shows home -->
     <script>
