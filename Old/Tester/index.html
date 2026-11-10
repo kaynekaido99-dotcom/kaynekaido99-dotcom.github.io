@@ -4,7 +4,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#09090b">
     <title>kaynekaido99.dev // Portfolio</title>
     <!-- iOS & Android Home Screen Shortcut -->
     <link rel="apple-touch-icon" href="Photos/Avatar.png">
@@ -15,7 +14,6 @@
     <link rel="manifest" href="manifest.json">
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Tailwind theme extras used by the Interactive view -->
     <script>
     tailwind.config = {
       darkMode: 'class',
@@ -44,9 +42,9 @@
         }
       }
     }
-    </script>
-    <!-- Phosphor Icons (Interactive view) -->
-    <script defer src="https://unpkg.com/@phosphor-icons/web"></script>
+  </script>
+    <!-- Phosphor Icons (credentials view) -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
     <!-- Entrance animation: hide page until start states are set (JS only) -->
     <script>
         if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
@@ -56,7 +54,50 @@
     </script>
     <!-- Custom Stylesheet -->
     <link rel="stylesheet" href="style.css">
+    <!-- Videos view styles -->
     <link rel="stylesheet" href="gallery.css">
+    <!-- Credentials marquee styles -->
+    <style>
+    /* Gradient Masks for Edge Fading */
+    .marquee-fade-mask {
+      mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+      -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+    }
+
+    /* Glassmorphism Badge Cards */
+    .glass-badge {
+      background: rgba(22, 27, 34, 0.75);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .glass-badge:hover {
+      border-color: rgba(56, 189, 248, 0.6);
+      transform: translateY(-4px) scale(1.02);
+
+    }
+
+    /* Marquee Track positioning */
+    .marquee-track {
+      display: flex;
+      width: max-content;
+      padding-top: 10px;
+      will-change: transform;
+    }
+
+    /* Pause marquee when hovered */
+    .marquee-container.paused .marquee-track {
+      animation-play-state: paused !important;
+    }
+
+    /* Range slider custom styling */
+    input[type=range] {
+      accent-color: #38bdf8;
+    }
+
+  </style>
     <!-- Google Fonts -->
     <link
         href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600;700&display=swap"
@@ -83,7 +124,7 @@
     </header>
 
     <!-- Main Profile Container -->
-    <main id="view-home" data-view="home" class="max-w-3xl w-full mx-auto px-4 py-8 flex-grow space-y-6">
+    <main id="view-home" class="max-w-3xl w-full mx-auto px-4 py-8 flex-grow space-y-6">
 
         <!-- Profile Card Box -->
         <div id="profile" class="bg-[#121215] border border-zinc-800/80 rounded-xl overflow-hidden shadow-2xl">
@@ -121,8 +162,10 @@
                 <div class="relative z-10">
                     <h1 class="text-4xl font-bold tracking-tight text-white flex items-center gap-2">
                         Bokie Porteza
-                        <svg class="w-5 h-5 text-sky-400 inline" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z" />
+                        <svg class="w-6 h-6 inline shrink-0" viewBox="0 0 24 24" role="img" aria-label="Verified" xmlns="http://www.w3.org/2000/svg">
+                            <title>Verified</title>
+                            <path fill="#0866FF" d="M12.00 0.90 L12.72 1.04 L13.39 1.44 L13.99 2.00 L14.52 2.58 L15.03 3.08 L15.56 3.41 L16.17 3.55 L16.88 3.56 L17.67 3.52 L18.48 3.55 L19.24 3.75 L19.85 4.15 L20.25 4.76 L20.45 5.52 L20.48 6.33 L20.44 7.12 L20.45 7.83 L20.59 8.44 L20.92 8.97 L21.42 9.48 L22.00 10.01 L22.56 10.61 L22.96 11.28 L23.10 12.00 L22.96 12.72 L22.56 13.39 L22.00 13.99 L21.42 14.52 L20.92 15.03 L20.59 15.56 L20.45 16.17 L20.44 16.87 L20.48 17.67 L20.45 18.48 L20.25 19.24 L19.85 19.85 L19.24 20.25 L18.48 20.45 L17.67 20.48 L16.88 20.44 L16.17 20.45 L15.56 20.59 L15.03 20.92 L14.52 21.42 L13.99 22.00 L13.39 22.56 L12.72 22.96 L12.00 23.10 L11.28 22.96 L10.61 22.56 L10.01 22.00 L9.48 21.42 L8.97 20.92 L8.44 20.59 L7.83 20.45 L7.13 20.44 L6.33 20.48 L5.52 20.45 L4.76 20.25 L4.15 19.85 L3.75 19.24 L3.55 18.48 L3.52 17.67 L3.56 16.88 L3.55 16.17 L3.41 15.56 L3.08 15.03 L2.58 14.52 L2.00 13.99 L1.44 13.39 L1.04 12.72 L0.90 12.00 L1.04 11.28 L1.44 10.61 L2.00 10.01 L2.58 9.48 L3.08 8.97 L3.41 8.44 L3.55 7.83 L3.56 7.12 L3.52 6.33 L3.55 5.52 L3.75 4.76 L4.15 4.15 L4.76 3.75 L5.52 3.55 L6.33 3.52 L7.12 3.56 L7.83 3.55 L8.44 3.41 L8.97 3.08 L9.48 2.58 L10.01 2.00 L10.61 1.44 L11.28 1.04Z" />
+                            <path d="M7.6 12.4l3 3 5.8-6.2" fill="none" stroke="#fff" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" />
                         </svg>
                     </h1>
                     <p class="text-zinc-400 text-sm mt-1">Real, working software & interactive web architectures.</p>
@@ -159,7 +202,7 @@
                 </div>
                 <div class="p-4 space-y-3">
                     <!-- Wrap the row in an <a> tag -->
-                    <a href="#interactive"
+                    <a href="#profile"
                         class="flex items-center gap-3 text-zinc-300 hover:text-white transition group">
                         <svg class="w-4 h-4 text-zinc-500 shrink-0 group-hover:text-sky-400 transition" fill="none"
                             stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -176,14 +219,15 @@
                         </svg>
                         <span>Loading local time...</span>
                     </div>
-                    <div class="flex items-center gap-3 text-zinc-300">
-                        <svg class="w-4 h-4 text-zinc-500 shrink-0" fill="none" stroke="currentColor" stroke-width="2"
+                    <button type="button" id="resume-trigger" aria-haspopup="dialog" aria-controls="resume-modal"
+                        class="flex items-center gap-3 w-full text-left text-zinc-300 hover:text-white transition group cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-400 rounded">
+                        <svg class="w-4 h-4 text-zinc-500 shrink-0 group-hover:text-sky-400 transition" fill="none" stroke="currentColor" stroke-width="2"
                             viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round"
                                 d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
                         </svg>
-                        <span>Resume, one page</span>
-                    </div>
+                        <span class="group-hover:underline">Resume, one page</span>
+                    </button>
                 </div>
             </div>
             <!-- Action Buttons Bar -->
@@ -488,7 +532,7 @@
                     </div>
                     <span class="text-zinc-500 group-hover:text-zinc-300">&nearrow;</span>
                 </button>
-                <button type="button" data-view-href="videos"
+                <button type="button" data-gallery-href="#videos"
                     class="w-full text-left cursor-pointer p-3 bg-zinc-900/60 hover:bg-zinc-800/80 border border-zinc-800 rounded-lg flex justify-between items-center transition-colors group focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-400">
                     <div class="flex items-center gap-3">
                         <svg class="w-5 h-5 fill-zinc-400 group-hover:fill-zinc-100 transition-colors"
@@ -645,9 +689,8 @@
 
     </main>
 
-    <!-- ============ VIEW: Videos (was gallery.html) ============ -->
-    <main id="view-videos" data-view="videos" hidden class="max-w-6xl w-full mx-auto px-4 py-8 flex-grow">
-
+    <!-- ===== VIEW: Videos (was gallery.html) ===== -->
+    <div id="view-videos" class="max-w-6xl w-full mx-auto px-4 py-8 flex-grow" hidden>
         <section class="bg-[#121215] border border-zinc-800/80 rounded-xl shadow-2xl overflow-hidden">
 
             <!-- Title bar -->
@@ -701,49 +744,22 @@
                 </div>
             </div>
         </section>
-
-    <!-- Video player modal (iframe is created on open, destroyed on close) -->
-    <div id="player" class="player" role="dialog" aria-modal="true" aria-labelledby="player-title" hidden>
-        <div class="player-panel" id="player-panel" data-orient="landscape">
-            <div class="player-head">
-                <div class="min-w-0">
-                    <p id="player-meta" class="font-mono text-xs text-zinc-500 truncate"></p>
-                    <h2 id="player-title" class="text-sm sm:text-base font-semibold text-zinc-50 leading-snug"></h2>
-                </div>
-                <button id="player-close" type="button" class="player-close" aria-label="Close video">&times;</button>
-            </div>
-            <div id="player-stage" class="player-stage"></div>
-            <div class="player-foot">
-                <p id="player-desc" class="text-sm text-zinc-400"></p>
-                <div id="player-tags" class="flex flex-wrap gap-1.5"></div>
-                <div class="flex items-center justify-between gap-3 pt-1">
-                    <div class="flex gap-2">
-                        <button id="player-prev" type="button" class="player-btn" aria-label="Previous video">&lsaquo;
-                            Prev</button>
-                        <button id="player-next" type="button" class="player-btn" aria-label="Next video">Next
-                            &rsaquo;</button>
-                    </div>
-                    <a id="player-open" href="#" target="_blank" rel="noopener noreferrer" class="player-btn">Open
-                        original &nearrow;</a>
-                </div>
-            </div>
-        </div>
     </div>
-    </main>
 
-    <!-- ============ VIEW: Interactive credentials (was interactive.html) ============ -->
-    <main id="view-interactive" data-view="interactive" hidden class="max-w-6xl w-full mx-auto px-4 py-8 flex-grow space-y-6">
-        <section class="bg-[#121215] border border-zinc-800/80 rounded-xl shadow-2xl overflow-hidden">
+    <!-- ===== VIEW: Interactive Credentials (was interactive.html) ===== -->
+    <div id="view-credentials" class="max-w-6xl w-full mx-auto px-4 py-8 flex-grow space-y-6" hidden>
+  <!-- Title bar -->
   <div
     class="px-4 sm:px-6 py-3 border-b border-zinc-800/60 flex flex-wrap justify-between items-center gap-x-3 gap-y-2 text-xs text-zinc-500 font-mono">
-    <a href="#profile"
+    <a href="#projects"
       class="inline-flex items-center gap-1.5 hover:text-zinc-200 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-400 rounded">
       <span aria-hidden="true">&larr;</span> Back to projects
     </a>
   </div>
-            <div class="p-4 sm:p-6">
+  <!-- Header & Title -->
+  <div class="bg-[#121215] border border-zinc-800/80 rounded-xl p-6">
     <div
-      class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+      class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-gray-800 pb-6">
       <div>
         <div
           class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-500/10 border border-sky-500/20 text-sky-400 text-xs font-semibold uppercase tracking-wider mb-2">
@@ -771,9 +787,11 @@
         </button>
       </div>
     </div>
-            </div>
-        </section>
-        <section>
+  </div>
+
+  <!-- Main Marquee Display Section -->
+  <div class="space-y-6">
+
     <div class="mb-3 flex items-center justify-between text-xs text-gray-400">
       <span class="flex items-center gap-1.5"><i class="ph-bold ph-hand-pointing text-sky-400 text-sm"></i> Hover over
         cards to pause & inspect</span>
@@ -813,7 +831,10 @@
         </div>
       </div>
     </div>
-        </section>
+  </div>
+
+  <!-- Interactive Control Panel & Badge Add Form -->
+  <div>
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
 
       <!-- Speed & Track Controls -->
@@ -911,7 +932,15 @@
       </div>
 
     </div>
-    </main>
+  </div>
+
+  <!-- Notification Toast -->
+  <div id="toast"
+    class="fixed bottom-6 right-6 px-4 py-3 rounded-xl bg-sky-500 text-gray-950 font-bold text-xs shadow-2xl flex items-center gap-2 transform translate-y-20 opacity-0 transition-all duration-300 z-50">
+    <i class="ph-bold ph-check-circle text-base"></i>
+    <span id="toastMsg">Badge added successfully!</span>
+  </div>
+    </div>
 
     <!-- Footer -->
     <footer
@@ -979,6 +1008,27 @@
         </div>
     </div>
 
+    <!-- Resume modal -->
+    <div id="resume-modal" class="media-modal" role="dialog" aria-modal="true" aria-labelledby="resume-title"
+        aria-hidden="true">
+        <div class="media-panel resume-panel">
+            <div class="media-panel-header">
+                <h2 id="resume-title" class="text-xs font-mono font-semibold uppercase tracking-wider text-zinc-400">
+                    Resume</h2>
+                <div class="flex items-center gap-3">
+                    <a id="resume-download" href="Resume/My%20Resume.pdf" download="My Resume.pdf" class="player-btn">
+                        <i class="ph ph-download-simple" aria-hidden="true"></i> Download Resume</a>
+                    <button id="resume-close" class="media-close" type="button" aria-label="Close resume">&times;</button>
+                </div>
+            </div>
+            <div class="resume-stage">
+                <p class="resume-fallback font-mono text-xs text-zinc-500">
+                    Can&rsquo;t preview the PDF here? Use <span class="text-sky-300">Download Resume</span> above.</p>
+                <iframe id="resume-frame" title="Resume PDF preview" data-src="Resume/My%20Resume.pdf#view=FitH"></iframe>
+            </div>
+        </div>
+    </div>
+
     <!-- Single media viewer (opens when a photo or video is clicked) -->
     <div id="media-viewer" class="media-modal media-viewer" role="dialog" aria-modal="true" aria-label="Media viewer"
         aria-hidden="true">
@@ -991,20 +1041,302 @@
     </div>
 
 
-    <!-- Notification toast (Interactive view) -->
-  <!-- Notification Toast -->
-  <div id="toast"
-    class="fixed bottom-6 right-6 px-4 py-3 rounded-xl bg-sky-500 text-gray-950 font-bold text-xs shadow-2xl flex items-center gap-2 pointer-events-none transform translate-y-20 opacity-0 transition-all duration-300 z-50">
-    <i class="ph-bold ph-check-circle text-base"></i>
-    <span id="toastMsg">Badge added successfully!</span>
-  </div>
+    <!-- Video player modal (was in gallery.html) -->
+    <!-- Video player modal (iframe is created on open, destroyed on close) -->
+    <div id="player" class="player" role="dialog" aria-modal="true" aria-labelledby="player-title" hidden>
+        <div class="player-panel" id="player-panel" data-orient="landscape">
+            <div class="player-head">
+                <div class="min-w-0">
+                    <p id="player-meta" class="font-mono text-xs text-zinc-500 truncate"></p>
+                    <h2 id="player-title" class="text-sm sm:text-base font-semibold text-zinc-50 leading-snug"></h2>
+                </div>
+                <button id="player-close" type="button" class="player-close" aria-label="Close video">&times;</button>
+            </div>
+            <div id="player-stage" class="player-stage"></div>
+            <div class="player-foot">
+                <p id="player-desc" class="text-sm text-zinc-400"></p>
+                <div id="player-tags" class="flex flex-wrap gap-1.5"></div>
+                <div class="flex items-center justify-between gap-3 pt-1">
+                    <div class="flex gap-2">
+                        <button id="player-prev" type="button" class="player-btn" aria-label="Previous video">&lsaquo;
+                            Prev</button>
+                        <button id="player-next" type="button" class="player-btn" aria-label="Next video">Next
+                            &rsaquo;</button>
+                    </div>
+                    <a id="player-open" href="#" target="_blank" rel="noopener noreferrer" class="player-btn">Open
+                        original &nearrow;</a>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Script File -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-    <script src="app.js?v=6"></script>
+    <script src="app.js?v=5"></script>
     <script src="entrance.js?v=5"></script>
-    <script src="gallery.js?v=1"></script>
-    <script src="interactive.js?v=1"></script>
+    <script src="gallery.js"></script>
+    <script src="resume.js"></script>
+
+    <!-- Credentials marquee logic (was in interactive.html) -->
+    <script>
+    // Initial Credentials Data
+    const defaultCredentials = [
+      { id: 1, title: 'PMP® Certification', issuer: 'PMI Institute', icon: 'ph-certificate', color: 'emerald' },
+      { id: 2, title: 'Cloud Architect', issuer: 'Google Cloud', icon: 'ph-cloud', color: 'sky' },
+      { id: 3, title: 'Deep Learning Specialization', issuer: 'NVIDIA Academy', icon: 'ph-cpu', color: 'purple' },
+      { id: 4, title: 'LLM & Prompt Eng', issuer: 'OpenAI / Claude', icon: 'ph-brain', color: 'amber' },
+      { id: 5, title: 'Cyber Security Lead', issuer: 'CISSP Certified', icon: 'ph-shield-check', color: 'rose' },
+      { id: 6, title: 'Full-Stack Developer', issuer: 'Meta Frontend', icon: 'ph-code', color: 'sky' },
+      { id: 7, title: 'DevOps Professional', issuer: 'AWS Certified', icon: 'ph-cloud', color: 'purple' },
+      { id: 8, title: 'Agile Scrum Master', issuer: 'Scrum.org', icon: 'ph-trophy', color: 'emerald' }
+    ];
+
+    let credentialsList = [...defaultCredentials];
+    let scrollDuration = 30; // Seconds
+    let isReversed = false;
+    let isPlaying = true;
+    let pauseOnHover = true;
+
+    // Color Maps for Dynamic Styling
+    const colorStyles = {
+      sky: { border: 'hover:border-sky-500/50', icon: 'text-sky-400', bg: 'bg-sky-500/10', glow: 'hover:shadow-sky-500/20' },
+      emerald: { border: 'hover:border-emerald-500/50', icon: 'text-emerald-400', bg: 'bg-emerald-500/10', glow: 'hover:shadow-emerald-500/20' },
+      purple: { border: 'hover:border-purple-500/50', icon: 'text-purple-400', bg: 'bg-purple-500/10', glow: 'hover:shadow-purple-500/20' },
+      amber: { border: 'hover:border-amber-500/50', icon: 'text-amber-400', bg: 'bg-amber-500/10', glow: 'hover:shadow-amber-500/20' },
+      rose: { border: 'hover:border-rose-500/50', icon: 'text-rose-400', bg: 'bg-rose-500/10', glow: 'hover:shadow-rose-500/20' }
+    };
+
+    const marqueeTrack = document.getElementById('marqueeTrack');
+    const marqueeContainer = document.getElementById('marqueeContainer');
+
+    // Render Badge Card HTML
+    function createBadgeCardHTML(item) {
+      const theme = colorStyles[item.color] || colorStyles.sky;
+      return `
+        <div class="glass-badge flex items-center gap-3.5 px-5 py-3.5 rounded-2xl cursor-pointer select-none group min-w-[240px] ${theme.border} ${theme.glow}" onclick="showBadgeDetails('${item.title}', '${item.issuer}')">
+          <div class="w-10 h-10 rounded-xl ${theme.bg} flex items-center justify-center ${theme.icon} text-xl shrink-0 group-hover:scale-110 transition-transform">
+            <i class="ph-bold ${item.icon}"></i>
+          </div>
+          <div class="flex flex-col">
+            <span class="text-white font-semibold text-sm tracking-tight group-hover:text-sky-300 transition-colors">${item.title}</span>
+            <span class="text-xs text-gray-400 font-medium">${item.issuer}</span>
+          </div>
+          <div class="ml-auto opacity-0 group-hover:opacity-100 transition-opacity text-gray-400">
+            <i class="ph-bold ph-arrow-up-right text-xs"></i>
+          </div>
+        </div>
+      `;
+    }
+
+    // Build Marquee Track with Duplicate Items for Continuous Loop
+    function renderMarquee() {
+      // Clear track
+      marqueeTrack.innerHTML = '';
+
+      // Generate items HTML
+      const itemsHTML = credentialsList.map(item => createBadgeCardHTML(item)).join('');
+
+      // We duplicate the dataset twice to create a perfectly seamless scroll reset
+      marqueeTrack.innerHTML = itemsHTML + itemsHTML;
+
+      // Update Marquee Dynamic CSS Keyframes / Animations
+      applyKeyframes();
+
+      // Update badge count
+      document.getElementById('badgeCounter').innerText = `Total Badges: ${credentialsList.length}`;
+    }
+
+    // Inject Custom Keyframe animation based on current track width & settings
+    function applyKeyframes() {
+      // Remove existing dynamic style tag if exists
+      const existingStyle = document.getElementById('dynamicMarqueeStyle');
+      if (existingStyle) existingStyle.remove();
+
+      const directionKey = isReversed ? 'marqueeReverse' : 'marqueeNormal';
+      const fromPos = isReversed ? '-50%' : '0%';
+      const toPos = isReversed ? '0%' : '-50%';
+
+      const style = document.createElement('style');
+      style.id = 'dynamicMarqueeStyle';
+      style.innerHTML = `
+        @keyframes ${directionKey} {
+          0% { transform: translateX(${fromPos}); }
+          100% { transform: translateX(${toPos}); }
+        }
+        
+        .marquee-track {
+          animation: ${directionKey} ${scrollDuration}s linear infinite;
+        }
+      `;
+      document.head.appendChild(style);
+    }
+
+    // Controls Logic
+    function togglePlayPause() {
+      isPlaying = !isPlaying;
+      const playIcon = document.getElementById('playIcon');
+      const playText = document.getElementById('playText');
+      const statusLabel = document.getElementById('statusLabel');
+
+      if (isPlaying) {
+        marqueeContainer.classList.remove('paused');
+        playIcon.className = 'ph-bold ph-pause text-sky-400';
+        playText.innerText = 'Pause';
+        statusLabel.innerText = 'RUNNING';
+        statusLabel.className = 'text-emerald-400 font-bold';
+      } else {
+        marqueeContainer.classList.add('paused');
+        playIcon.className = 'ph-bold ph-play text-sky-400';
+        playText.innerText = 'Play';
+        statusLabel.innerText = 'PAUSED';
+        statusLabel.className = 'text-amber-400 font-bold';
+      }
+    }
+
+    function toggleDirection() {
+      isReversed = !isReversed;
+      document.getElementById('dirValueLabel').innerText = isReversed ? 'REVERSED' : 'NORMAL';
+      applyKeyframes();
+      showToast(isReversed ? 'Marquee direction reversed' : 'Marquee set to normal direction');
+    }
+
+    function updateSpeed(val) {
+      scrollDuration = val;
+      document.getElementById('sliderValDisplay').innerText = `${val}s`;
+      document.getElementById('speedValueLabel').innerText = `${val}s`;
+      applyKeyframes();
+    }
+
+    function togglePauseOnHoverSetting(enabled) {
+      pauseOnHover = enabled;
+      if (pauseOnHover) {
+        marqueeContainer.addEventListener('mouseenter', handleMouseEnter);
+        marqueeContainer.addEventListener('mouseleave', handleMouseLeave);
+      } else {
+        marqueeContainer.removeEventListener('mouseenter', handleMouseEnter);
+        marqueeContainer.removeEventListener('mouseleave', handleMouseLeave);
+        if (isPlaying) marqueeContainer.classList.remove('paused');
+      }
+    }
+
+    function handleMouseEnter() {
+      if (pauseOnHover && isPlaying) {
+        marqueeContainer.classList.add('paused');
+      }
+    }
+
+    function handleMouseLeave() {
+      if (pauseOnHover && isPlaying) {
+        marqueeContainer.classList.remove('paused');
+      }
+    }
+
+    // Add New Badge Form Handler
+    function handleBadgeSubmit(e) {
+      e.preventDefault();
+      const title = document.getElementById('badgeTitleInput').value.trim();
+      const issuer = document.getElementById('badgeIssuerInput').value.trim();
+      const icon = document.getElementById('badgeIconSelect').value;
+      const color = document.getElementById('badgeColorSelect').value;
+
+      if (!title || !issuer) return;
+
+      const newBadge = {
+        id: Date.now(),
+        title,
+        issuer,
+        icon,
+        color
+      };
+
+      credentialsList.push(newBadge);
+      renderMarquee();
+
+      // Reset Form
+      document.getElementById('badgeTitleInput').value = '';
+      document.getElementById('badgeIssuerInput').value = '';
+
+      showToast(`Added "${title}" badge!`);
+    }
+
+    function resetDefaultBadges() {
+      credentialsList = [...defaultCredentials];
+      renderMarquee();
+      showToast('Reset to default credentials');
+    }
+
+    function showBadgeDetails(title, issuer) {
+      showToast(`Selected: ${title} (${issuer})`);
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      const toastMsg = document.getElementById('toastMsg');
+      toastMsg.innerText = msg;
+      toast.classList.remove('translate-y-20', 'opacity-0');
+      toast.classList.add('translate-y-0', 'opacity-100');
+
+      setTimeout(() => {
+        toast.classList.remove('translate-y-0', 'opacity-100');
+        toast.classList.add('translate-y-20', 'opacity-0');
+      }, 2500);
+    }
+
+    // Initialization on Page Load
+    window.addEventListener('load', function () {
+      renderMarquee();
+
+      // Attach initial hover listeners
+      marqueeContainer.addEventListener('mouseenter', handleMouseEnter);
+      marqueeContainer.addEventListener('mouseleave', handleMouseLeave);
+    });
+  </script>
+
+    <!-- View router: #videos and #credentials swap in for the home page, everything else shows home -->
+    <script>
+        (function () {
+            const views = {
+                home: { el: document.getElementById('view-home'), title: 'kaynekaido99.dev // Portfolio' },
+                videos: { el: document.getElementById('view-videos'), title: 'Videos // kaynekaido99.dev' },
+                credentials: { el: document.getElementById('view-credentials'), title: 'Interactive Credentials // kaynekaido99.dev' }
+            };
+            const routes = { '#videos': 'videos', '#credentials': 'credentials' };
+            let current = null;
+            let homeScroll = 0;
+
+            function route() {
+                const hash = window.location.hash;
+                const name = routes[hash] || 'home';
+                const first = current === null;
+                const changed = name !== current;
+
+                if (changed) {
+                    if (current === 'home') homeScroll = window.scrollY;
+                    if (current === 'videos') {            // stop any playing video when leaving
+                        const player = document.getElementById('player');
+                        if (player && !player.hidden) document.getElementById('player-close').click();
+                    }
+                    Object.keys(views).forEach((k) => { views[k].el.hidden = k !== name; });
+                    document.title = views[name].title;
+                    current = name;
+                }
+
+                if (name === 'home') {
+                    if (changed) window.dispatchEvent(new Event('resize')); // let the particle canvas re-measure
+                    const target = hash && document.getElementById(hash.slice(1));
+                    if (target) { if (changed || !first) target.scrollIntoView(); }
+                    else if (changed && !first) window.scrollTo(0, homeScroll);
+                } else if (changed && !first) {
+                    window.scrollTo(0, 0);
+                }
+            }
+
+            window.addEventListener('hashchange', route);
+            // Runs after entrance.js has measured the home page, so its animations are unaffected
+            if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', route);
+            else route();
+        })();
+    </script>
 </body>
 
 </html>
