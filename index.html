@@ -529,6 +529,25 @@
                                     d="M12 0l12 12-12 12L0 12L12 0zm-.5 6.5v2.8h-2.8v2.8h2.8v2.8h2.8v-2.8h2.8V9.3h-2.8V6.5h-2.8z" />
                             </svg>Netlify
                         </span>
+                        <span
+                            class="inline-flex items-center gap-1.5 rounded-full border border-zinc-800 bg-zinc-950/70 px-3 py-1.5 text-xs font-mono text-zinc-300">
+                            <svg class="h-3.5 w-3.5 shrink-0" viewBox="0 0 128 128" fill="none" aria-hidden="true">
+                                <!-- Green Q Ring with bottom-right gap -->
+                                <path
+                                    d="M 88.6 93.8 A 42 42 0 1 1 99.6 74.2 L 117.8 81.4 A 61.5 61.5 0 1 0 101.6 109.2 Z"
+                                    fill="#75A928" />
+                                <!-- Orange Top Segment -->
+                                <polygon points="52,48 64,48 76,60 64,60" fill="#EE7913" />
+                                <polygon points="52,48 64,60 64,74 52,62" fill="#D9660A" />
+                                <!-- Yellow Middle Segment -->
+                                <polygon points="64,60 76,60 85,69 73,69" fill="#F6E049" />
+                                <polygon points="64,60 73,69 73,83 64,74" fill="#E5C825" />
+                                <!-- Green Bottom Tail Segment -->
+                                <polygon points="73,69 85,69 116,100 104,100" fill="#89B836" />
+                                <polygon points="73,69 104,100 104,114 73,83" fill="#689820" />
+                            </svg>
+                            <span>QGIS</span>
+                        </span>
                     </div>
                 </div>
                 <button type="button" data-gallery-open="photos" aria-haspopup="dialog"
@@ -639,10 +658,14 @@
                 <li><strong class="text-white">Video production & graphic design.</strong> Experienced in automated
                     video production, clip generation pipelines with FFmpeg/Python, and crafting high-impact digital
                     graphics and visual branding assets.</li>
+                <li>
+                    <strong class="font-semibold text-zinc-100">GIS &amp; spatial mapping.</strong>
+                    Knowledgeable in QGIS for building custom geographic maps, managing spatial point layers, and
+                    styling cartographic data.
+                </li>
             </ul>
         </section>
 
-        <!-- Contact Section -->
         <!-- Contact Section -->
         <section id="contact" class="bg-[#121215] border border-zinc-800/80 rounded-xl p-6 space-y-3">
             <h3 class="text-sm font-mono font-semibold text-zinc-200">Get In Touch</h3>
@@ -976,29 +999,39 @@
         aria-hidden="true">
         <div class="media-panel">
             <div class="media-panel-header">
-                <h2 id="gallery-title" class="text-xs font-mono font-semibold uppercase tracking-wider text-zinc-400">
-                </h2>
+                <div class="min-w-0">
+                    <h2 id="gallery-title"
+                        class="text-xs font-mono font-semibold uppercase tracking-wider text-zinc-400"></h2>
+                    <p id="gallery-heading" class="mt-1 text-sm sm:text-base font-semibold text-zinc-50 leading-snug">
+                    </p>
+                    <p id="gallery-meta" class="mt-0.5 text-xs font-mono text-zinc-500"></p>
+                </div>
                 <button id="gallery-close" class="media-close" type="button" aria-label="Close gallery">&times;</button>
             </div>
 
             <div class="gallery-grid" data-gallery="photos" hidden>
-                <button type="button" class="gallery-item" data-index="0" aria-label="Open photo 1">
-                    <img src="Photos/12.jpg" alt="Photo 1" loading="lazy">
+                <button type="button" class="gallery-item" data-index="0" aria-label="Open photo 1: Expenses Tracker">
+                    <img src="Photos/12.jpg" alt="Expenses Tracker" loading="lazy">
+                    <span class="gallery-badge font-mono">Expenses Tracker</span>
                 </button>
-                <button type="button" class="gallery-item" data-index="1" aria-label="Open photo 2">
-                    <img src="blank" alt="Photo 2" loading="lazy">
+                <button type="button" class="gallery-item" data-index="1" aria-label="Open photo 2: QGIS Schools Layers">
+                    <img src="Photos/qgis.jpg" alt="QGIS Schools Layers" loading="lazy">
+                    <span class="gallery-badge font-mono">QGIS Schools Layers</span>
                 </button>
-                <button type="button" class="gallery-item" data-index="2" aria-label="Open photo 3">
-                    <img src="blank" alt="Photo 3" loading="lazy">
+                <button type="button" class="gallery-item" data-index="2" aria-label="Open photo 3: Layering">
+                    <img src="Photos/qgis1.jpg" alt="Layering" loading="lazy">
+                    <span class="gallery-badge font-mono">Layering</span>
                 </button>
-                <button type="button" class="gallery-item" data-index="3" aria-label="Open photo 4">
-                    <img src="blank" alt="Photo 4" loading="lazy">
+                <button type="button" class="gallery-item" data-index="3" aria-label="Open photo 4: Scale 790071">
+                    <img src="Photos/qgis2.jpg" alt="Scale 790071" loading="lazy">
+                    <span class="gallery-badge font-mono">Scale 790071</span>
                 </button>
-                <button type="button" class="gallery-item" data-index="4" aria-label="Open photo 5">
-                    <img src="blank" alt="Photo 5" loading="lazy">
+                <button type="button" class="gallery-item" data-index="4" aria-label="Open photo 5: Legends">
+                    <img src="Photos/qgis3.jpg" alt="Legends" loading="lazy">
+                    <span class="gallery-badge font-mono">Legends</span>
                 </button>
                 <button type="button" class="gallery-item" data-index="5" aria-label="Open photo 6">
-                    <img src="blank" alt="Photo 6" loading="lazy">
+                    <img src="Photos/qgis4.jpg" alt="Photo 6" loading="lazy">
                 </button>
             </div>
 
@@ -1038,8 +1071,17 @@
                 </div>
             </div>
             <div class="resume-stage">
-                <p class="resume-fallback font-mono text-xs text-zinc-500">
-                    Can&rsquo;t preview the PDF here? Use <span class="text-sky-300">Download Resume</span> above.</p>
+                <div class="resume-fallback font-mono text-xs text-zinc-500">
+                    <div>
+                        <p id="resume-status">Can&rsquo;t preview the PDF here? Use <span
+                                class="text-sky-300">Download Resume</span> above.</p>
+                        <a id="resume-open" href="Resume/My%20Resume.pdf" target="_blank" rel="noopener"
+                            class="player-btn" hidden>Open PDF &nearrow;</a>
+                    </div>
+                </div>
+                <!-- Phones / browsers without a built-in PDF viewer: pages are drawn here with PDF.js -->
+                <div id="resume-pages" class="resume-pages" aria-label="Resume pages"></div>
+                <!-- Desktop browsers: native PDF viewer -->
                 <iframe id="resume-frame" title="Resume PDF preview"
                     data-src="Resume/My%20Resume.pdf#view=FitH"></iframe>
             </div>

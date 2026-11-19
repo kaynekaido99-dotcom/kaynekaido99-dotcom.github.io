@@ -378,6 +378,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // 4. Photos / Videos gallery modal + single media viewer
     const galleryModal = document.getElementById('gallery-modal');
     const galleryTitle = document.getElementById('gallery-title');
+    const galleryHeading = document.getElementById('gallery-heading');
+    const galleryMeta = document.getElementById('gallery-meta');
     const galleryClose = document.getElementById('gallery-close');
     const viewer = document.getElementById('media-viewer');
     const viewerStage = document.getElementById('viewer-stage');
@@ -388,6 +390,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (galleryModal && viewer && viewerStage) {
         const titles = { photos: 'Photos', videos: 'Videos' };
+        const headings = { photos: 'Project Screenshots', videos: 'Video Compilation' };
+        const nouns = { photos: ['image', 'images'], videos: ['video', 'videos'] };
+        const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        let introRun = 0;
         let activeKind = null;
         let activeItems = [];
         let viewerIndex = 0;
@@ -416,6 +422,51 @@ document.addEventListener('DOMContentLoaded', () => {
             }, 230);
         }
 
+        // Each time the gallery opens: items pop in one after another, every picture shows a
+        // skeleton until its image has loaded (and a short minimum time has passed), then fades in
+        // together with its title badge.
+        function playGalleryIntro(items) {
+            const run = ++introRun;
+
+            // reset anything left over from a previous open
+            galleryModal.querySelectorAll('.gallery-item').forEach((item) => {
+                item.classList.remove('is-intro', 'is-loading');
+                const old = item.querySelector('.skeleton');
+                if (old) old.remove();
+            });
+            void galleryModal.offsetWidth; // flush styles so the intro animation restarts on every open
+
+            items.forEach((item, i) => {
+                const img = item.querySelector('img');
+                item.style.setProperty('--i', i);
+                if (!reduceMotion) item.classList.add('is-intro');
+                if (!img) return; // videos: intro animation only
+
+                item.classList.add('is-loading');
+                const skeleton = document.createElement('span');
+                skeleton.className = 'skeleton';
+                skeleton.setAttribute('aria-hidden', 'true');
+                item.appendChild(skeleton);
+
+                const imageReady = new Promise((resolve) => {
+                    if (img.complete) { resolve(); return; } // cached, or already failed
+                    img.addEventListener('load', resolve, { once: true });
+                    img.addEventListener('error', resolve, { once: true });
+                });
+                const minimumWait = new Promise((resolve) => {
+                    window.setTimeout(resolve, reduceMotion ? 0 : 450 + i * 140);
+                });
+                const safetyNet = new Promise((resolve) => window.setTimeout(resolve, 8000));
+
+                Promise.race([Promise.all([imageReady, minimumWait]), safetyNet]).then(() => {
+                    if (run !== introRun || !skeleton.isConnected) return; // reopened meanwhile
+                    item.classList.remove('is-loading');
+                    skeleton.classList.add('is-done');
+                    window.setTimeout(() => skeleton.remove(), 450);
+                });
+            });
+        }
+
         function openGallery(kind, trigger) {
             activeKind = kind;
             galleryTrigger = trigger;
@@ -424,6 +475,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 grid.hidden = grid.dataset.gallery !== kind;
             });
             activeItems = Array.from(galleryModal.querySelectorAll(`.gallery-grid[data-gallery="${kind}"] .gallery-item`));
+            if (galleryHeading) galleryHeading.textContent = headings[kind];
+            if (galleryMeta) {
+                const noun = nouns[kind][activeItems.length === 1 ? 0 : 1];
+                galleryMeta.textContent = `${activeItems.length} ${noun}`;
+            }
+            playGalleryIntro(activeItems);
             showModal(galleryModal);
             galleryClose.focus();
         }
