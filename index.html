@@ -56,6 +56,8 @@
     <link rel="stylesheet" href="style.css">
     <!-- Videos view styles -->
     <link rel="stylesheet" href="gallery.css">
+    <!-- Component playground styles -->
+    <link rel="stylesheet" href="playground.css">
     <!-- Credentials marquee styles -->
     <style>
         /* Gradient Masks for Edge Fading */
@@ -972,6 +974,72 @@
             </div>
         </div>
 
+        <!-- Component Playground -->
+        <section id="pg" class="bg-[#121215] border border-zinc-800/80 rounded-xl p-6" aria-labelledby="pg-title">
+            <div
+                class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-zinc-800 pb-5 mb-5">
+                <div>
+                    <div
+                        class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-500/10 border border-sky-500/20 text-sky-400 text-xs font-semibold uppercase tracking-wider mb-2">
+                        <i class="ph-bold ph-flask text-sm"></i> Component Playground
+                    </div>
+                    <h2 id="pg-title" class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">Live
+                        Component Lab</h2>
+                    <p class="text-gray-400 text-sm mt-1">Tweak badges, marquee, theme, sliders and layout grids and
+                        watch the preview update instantly.</p>
+                </div>
+                <div class="flex flex-wrap items-center gap-2">
+                    <button id="pg-mode" type="button" class="pg-mode" role="switch" aria-checked="false"
+                        aria-label="Toggle day / night mode">
+                        <span class="pg-knob"><i class="ph-bold ph-moon"></i></span>
+                    </button>
+                    <button id="pg-random" type="button" class="player-btn"><i class="ph-bold ph-dice-five"></i>
+                        Randomize</button>
+                    <button id="pg-reset" type="button" class="player-btn"><i class="ph-bold ph-arrow-counter-clockwise"></i>
+                        Reset</button>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-[18rem_1fr] gap-6">
+                <!-- Controls -->
+                <div class="min-w-0">
+                    <div id="pg-tabs" class="pg-tabs" role="group" aria-label="Control groups"></div>
+                    <div id="pg-panels"></div>
+                </div>
+
+                <!-- Live stage -->
+                <div id="pg-stage" class="pg-stage">
+                    <div id="pg-sec-badges" class="pg-sec">
+                        <h4>Interactive badges</h4>
+                        <div id="pg-badges" class="pg-badges"></div>
+                    </div>
+                    <div id="pg-sec-marquee" class="pg-sec">
+                        <h4>Dynamic marquee</h4>
+                        <div id="pg-marquee" class="pg-mqs"></div>
+                    </div>
+                    <div id="pg-sec-sliders" class="pg-sec">
+                        <h4>Custom sliders</h4>
+                        <div class="pg-row"><span>Single</span><div id="pg-s1"></div><output id="pg-s1o"></output></div>
+                        <div class="pg-row"><span>Range</span><div id="pg-s2"></div><output id="pg-s2o"></output></div>
+                        <div class="pg-row"><span>Stepped</span><div id="pg-s3"></div><output id="pg-s3o"></output></div>
+                    </div>
+                    <div id="pg-sec-grid" class="pg-sec">
+                        <h4>Layout grid (drag tiles to reorder)</h4>
+                        <div id="pg-grid" class="pg-grid"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="pg-sec-theme" class="mt-6">
+                <div class="flex items-center justify-between mb-2">
+                    <h3 class="text-white font-semibold text-sm flex items-center gap-2"><i
+                            class="ph-bold ph-code text-sky-400"></i> Generated CSS</h3>
+                    <button id="pg-copy" type="button" class="player-btn"><i class="ph-bold ph-copy"></i> Copy</button>
+                </div>
+                <pre id="pg-code" class="pg-code" tabindex="0"></pre>
+            </div>
+        </section>
+
         <!-- Notification Toast -->
         <div id="toast"
             class="fixed bottom-6 right-6 px-4 py-3 rounded-xl bg-sky-500 text-gray-950 font-bold text-xs shadow-2xl flex items-center gap-2 transform translate-y-20 opacity-0 transition-all duration-300 z-50">
@@ -1141,6 +1209,7 @@
     <script src="entrance.js?v=5"></script>
     <script src="gallery.js"></script>
     <script src="resume.js"></script>
+    <script src="playground.js"></script>
 
     <!-- Credentials marquee logic (was in interactive.html) -->
     <script>

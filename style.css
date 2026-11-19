@@ -613,6 +613,7 @@ html::-webkit-scrollbar-thumb:hover {
     background: #22d3ee;
     box-shadow: 0 0 15px #22d3ee;
 }
+
 /* ---------- Resume modal ---------- */
 .resume-panel {
     display: flex;

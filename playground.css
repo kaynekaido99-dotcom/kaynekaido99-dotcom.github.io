@@ -1,5 +1,5 @@
 /* Component Playground (inside #view-credentials). Stage colours come from CSS variables set by playground.js */
-.pg-tabs{display:flex;gap:.4rem;overflow-x:auto;scrollbar-width:none;margin-bottom:1rem}
+.pg-tabs{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1rem}
 .pg-tabs::-webkit-scrollbar{display:none}
 .pg-tab{flex:none;padding:.4rem .8rem;border:1px solid #27272a;border-radius:9999px;background:rgb(9 9 11/.7);color:#a1a1aa;font:500 .8125rem/1 Inter,sans-serif;cursor:pointer;transition:color .15s,border-color .15s,background-color .15s}
 .pg-tab:hover{color:#f4f4f5;border-color:#3f3f46}
