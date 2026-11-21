@@ -897,3 +897,100 @@ main {
         animation: none;
     }
 }
+
+
+/* ---------- Clickable detail rows (location, Building Custom Web Systems, Resume) ---------- */
+.link-row {
+    position: relative;
+    margin-inline: -0.625rem;            /* keep the icons aligned with the non-clickable rows */
+    padding: 0.4rem 0.625rem;
+    border: 1px solid rgb(63 63 70 / 0.45);
+    border-radius: 0.5rem;
+    background: rgb(24 24 27 / 0.45);
+    cursor: pointer;
+    transition:
+        background 0.3s ease,
+        border-color 0.3s ease,
+        box-shadow 0.3s ease,
+        color 0.3s ease;
+}
+
+button.link-row {
+    width: calc(100% + 1.25rem);         /* buttons don't stretch into negative margins like links do */
+}
+
+.link-row:hover,
+.link-row:focus-visible {
+    background: rgb(8 47 73 / 0.45);
+    border-color: rgb(14 165 233 / 0.5);
+    box-shadow: 0 0 0 3px rgb(14 165 233 / 0.08), 0 0 18px rgb(14 165 233 / 0.12);
+}
+
+.link-row:focus-visible {
+    outline: 2px solid #38bdf8;
+    outline-offset: 2px;
+}
+
+.link-row:active {
+    background: rgb(8 47 73 / 0.65);
+}
+
+.link-row:hover > svg:first-child,
+.link-row:focus-visible > svg:first-child {
+    color: #38bdf8;
+}
+
+/* trailing arrow / eye: the "this is clickable" cue */
+.link-row-icon {
+    flex: none;
+    width: 0.9rem;
+    height: 0.9rem;
+    margin-left: auto;
+    color: #71717a;
+    transition: color 0.3s ease, transform 0.3s cubic-bezier(0.2, 0.75, 0.25, 1);
+    animation: link-nudge 4.5s ease-in-out infinite;
+    animation-delay: var(--nudge-delay, 0s);
+}
+
+.link-row:hover .link-row-icon,
+.link-row:focus-visible .link-row-icon {
+    color: #38bdf8;
+    animation: none;
+}
+
+.link-row:hover .link-row-icon--ne {
+    transform: translate(2px, -2px);
+}
+
+.link-row:hover .link-row-icon--e {
+    transform: translateX(3px);
+}
+
+.link-row:hover .link-row-icon--eye {
+    transform: scale(1.15);
+}
+
+/* a small, occasional nudge so visitors notice the rows are interactive */
+@keyframes link-nudge {
+
+    0%,
+    78%,
+    100% {
+        transform: none;
+        color: #71717a;
+    }
+
+    86% {
+        transform: translate(2px, -2px);
+        color: #38bdf8;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .link-row,
+    .link-row-icon {
+        transition-duration: 1ms;
+        animation: none;
+    }
+}

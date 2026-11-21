@@ -17,6 +17,8 @@
             category: 'Content',
             tags: ['designinspo'],
             url: 'https://www.facebook.com/reel/1521173076246654/',
+            embeddable: false, // Facebook blocks this reel from playing on other sites
+            file: 'Videos/1521173076246654.mp4', // your own copy: plays here instead (falls back to the Facebook card if the file is missing)
             thumbnail: 'VideoThumbnails/1521173076246654.avif'
         },
         {
@@ -33,6 +35,8 @@
             category: 'Content',
             tags: ['VibeCoders', 'BlockboxCLI', 'BlackboxAI', 'VSc'],
             url: 'https://www.facebook.com/reel/1035400622485143/',
+            embeddable: false, // Facebook blocks this reel from playing on other sites
+            file: 'Videos/1035400622485143.mp4', // your own copy: plays here instead (falls back to the Facebook card if the file is missing)
             thumbnail: 'VideoThumbnails/1035400622485143.jpg'
         },
         {
@@ -49,6 +53,8 @@
             category: 'Content',
             tags: ['Vanilla JS'],
             url: 'https://www.facebook.com/reel/2513146219199860/',
+            embeddable: false, // Facebook blocks this reel from playing on other sites
+            file: 'Videos/2513146219199860.mp4', // your own copy: plays here instead (falls back to the Facebook card if the file is missing)
             thumbnail: 'VideoThumbnails/2513146219199860.jpg'
         },
         {
@@ -66,6 +72,8 @@
             category: 'Content',
             tags: ['vscode', 'ffmpeg', 'Xendit'],
             url: 'https://www.facebook.com/reel/1016996078127323/',
+            embeddable: false, // Facebook blocks this reel from playing on other sites
+            file: 'Videos/1016996078127323.mp4', // your own copy: plays here instead (falls back to the Facebook card if the file is missing)
             thumbnail: 'VideoThumbnails/1016996078127323.jpg',
             orientation: 'landscape'
         },
@@ -327,16 +335,61 @@
         const f = document.createElement('iframe');
         f.title = v.title;
         f.src = v.embedUrl;
-        f.allow = 'autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share; fullscreen';
-        f.allowFullscreen = true;
+        f.allow = 'autoplay; clipboard-write; encrypted-media; picture-in-picture; fullscreen';
         f.referrerPolicy = 'strict-origin-when-cross-origin';
         f.setAttribute('scrolling', 'no');
         f.addEventListener('load', () => spin.remove(), { once: true });
         stage.appendChild(f);
     }
 
+    // Self-hosted file (video.file): plays in the page's own <video> player
+    function mountVideo(v) {
+        stage.textContent = '';
+        const m = document.createElement('video');
+        m.className = 'player-video';
+        m.src = v.file;
+        m.controls = true;
+        m.autoplay = true;
+        m.playsInline = true;
+        m.preload = 'metadata';
+        if (v.thumbnail) m.poster = v.thumbnail;
+        m.setAttribute('aria-label', v.title);
+        // file missing / unsupported -> show the "Watch on Facebook" card instead
+        m.addEventListener('error', () => {
+            if (!stage.contains(m)) return;
+            panel.dataset.orient = 'landscape';
+            mountFallback(v);
+        }, { once: true });
+        stage.appendChild(m);
+    }
+
+    // Card shown instead of the player for videos the host refuses to embed (`embeddable: false`)
+    function mountFallback(v) {
+        stage.textContent = '';
+        const card = document.createElement('div');
+        card.className = 'vfallback';
+        const name = PLATFORM_LABEL[v.platform] || 'the original site';
+        card.innerHTML =
+            (v.thumbnail ? '<img class="vfallback-bg" src="' + esc(v.thumbnail) + '" alt="">' : '') +
+            '<div class="vfallback-body">' +
+            '<span class="vfallback-icon" aria-hidden="true">&#9654;</span>' +
+            '<p class="vfallback-title">This video plays on ' + esc(name) + '</p>' +
+            '<p class="vfallback-text">' + esc(name) + ' doesn&rsquo;t allow this one to be embedded on other websites.</p>' +
+            '<div class="vfallback-actions">' +
+            '<a class="player-btn" href="' + esc(v.watchUrl) + '" target="_blank" rel="noopener noreferrer">Watch on ' + esc(name) + ' &nearrow;</a>' +
+            '<button type="button" class="player-btn" data-try>Try embedded player</button>' +
+            '</div></div>';
+        card.querySelector('[data-try]').addEventListener('click', () => {
+            panel.dataset.orient = v.orientation;
+            mountIframe(v);
+        });
+        stage.appendChild(card);
+    }
+
     // Removing the iframe from the DOM stops playback (and audio) immediately
     function unmountIframe() {
+        const m = stage.querySelector('video');
+        if (m) { m.pause(); m.removeAttribute('src'); m.load(); }
         const f = stage.querySelector('iframe');
         if (f) { f.src = 'about:blank'; f.remove(); }
         stage.textContent = '';
@@ -346,7 +399,8 @@
         const v = shown[i];
         if (!v) return;
         current = i;
-        panel.dataset.orient = v.orientation;
+        const blocked = v.embeddable === false && !v.file;
+        panel.dataset.orient = blocked ? 'landscape' : v.orientation;
         $('#player-meta').textContent = PLATFORM_LABEL[v.platform] + ' / ' + v.category;
         $('#player-title').textContent = v.title;
         $('#player-desc').textContent = v.description;
@@ -356,7 +410,9 @@
         open.hidden = !/^https?:/i.test(v.watchUrl);
         $('#player-prev').disabled = i <= 0;
         $('#player-next').disabled = i >= shown.length - 1;
-        mountIframe(v);
+        if (v.file) mountVideo(v);
+        else if (blocked) mountFallback(v);
+        else mountIframe(v);
     }
 
     function openPlayer(id) {
