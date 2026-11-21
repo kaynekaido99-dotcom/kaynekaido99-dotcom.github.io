@@ -702,3 +702,198 @@ html::-webkit-scrollbar-thumb:hover {
         height: min(88dvh, 60rem);
     }
 }
+
+/* ---------- "Give it a Poke!" hand-written callout (sits outside the profile card) ---------- */
+main {
+    position: relative; /* anchor for the callout */
+}
+
+.poke-callout {
+    position: absolute;
+    top: 1.1rem;                      /* lines up with the "+ Poke" button row */
+    left: 100%;                       /* just outside the right edge of the card */
+    margin-top: 0 !important;         /* cancel Tailwind space-y-6 on <main> */
+    width: 11rem;
+    display: none;
+    color: #f4f4f5;
+    font-family: 'Caveat', 'Segoe Print', 'Bradley Hand', cursive;
+    line-height: 1.05;
+    pointer-events: none;
+    user-select: none;
+    opacity: 0;
+    animation: poke-callout-in 700ms cubic-bezier(0.2, 0.75, 0.25, 1) 3s forwards; /* after the entrance animation */
+}
+
+
+
+.poke-callout-title {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 1.9rem;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    text-shadow: 0 2px 10px rgb(0 0 0 / 0.6);
+    transform: rotate(-3deg);
+    transform-origin: left center;
+}
+
+.poke-callout-hand {
+    display: inline-block;
+    font-size: 1.6rem;
+    animation: poke-hand-nudge 1.4s ease-in-out infinite;
+}
+
+.poke-callout-sub {
+    margin: 0.2rem 0 0;
+    font-size: 1.15rem;
+    font-weight: 500;
+    color: #a1a1aa;
+    transform: rotate(-3deg);
+    transform-origin: left center;
+}
+
+@keyframes poke-callout-in {
+    from {
+        opacity: 0;
+        transform: translateX(14px);
+    }
+
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+/* the hand "pokes" toward the card */
+@keyframes poke-hand-nudge {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    50% {
+        transform: translateX(-6px);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .poke-callout {
+        animation-duration: 1ms;
+        animation-delay: 0s;
+    }
+
+    .poke-callout-hand {
+        animation: none;
+    }
+}
+
+
+/* ---- Poke callout: responsive layout (kept last so it overrides the base rules above) ---- */
+/* Mobile / tablet: callout sits above the profile card, pointing down at the Poke button */
+#view-home {
+    padding-top: 4rem;
+}
+
+.poke-callout {
+    display: block;
+    top: 0.6rem;
+    left: auto;
+    right: 1rem;
+    width: auto;
+    text-align: right;
+}
+
+.poke-callout-title {
+    justify-content: flex-end;
+    font-size: 1.6rem;
+    transform: rotate(-2deg);
+    transform-origin: right center;
+}
+
+.poke-callout-sub {
+    font-size: 1.05rem;
+    transform: rotate(-2deg);
+    transform-origin: right center;
+}
+
+.poke-callout-sub br {
+    display: none;
+}
+
+.poke-hand-side {
+    display: none;
+}
+
+.poke-hand-down {
+    animation-name: poke-hand-nudge-down;
+    /* centres the hand over the "+ Poke" button:
+       card padding (1rem) + half the button width (~1.9rem) - half the hand (~0.8rem) */
+    margin-right: 2.1rem;
+}
+
+@media (min-width: 640px) {
+    .poke-hand-down {
+        margin-right: 2.6rem; /* card padding is 1.5rem from 640px up */
+    }
+}
+
+/* Desktop: callout sits beside the card, pointing left at it */
+@media (min-width: 1280px) {
+    #view-home {
+        padding-top: 2rem;
+    }
+
+    .poke-callout {
+        top: 2.6rem;      /* hand lines up with the centre of the "+ Poke" button */
+        left: 100%;
+        right: auto;
+        width: max-content;
+        text-align: left;
+    }
+
+    .poke-callout-title {
+        justify-content: flex-start;
+        white-space: nowrap;   /* keep the hand and text on one line */
+        font-size: 1.8rem;
+        transform: rotate(-3deg);
+        transform-origin: left center;
+    }
+
+    .poke-callout-sub {
+        font-size: 1.15rem;
+        transform: rotate(-3deg);
+        transform-origin: left center;
+    }
+
+    .poke-callout-sub br {
+        display: inline;
+    }
+
+    .poke-hand-side {
+        display: inline-block;
+    }
+
+    .poke-hand-down {
+        display: none;
+    }
+}
+
+@keyframes poke-hand-nudge-down {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(5px);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .poke-hand-down {
+        animation: none;
+    }
+}
