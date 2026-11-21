@@ -357,6 +357,8 @@
         // file missing / unsupported -> show the "Watch on Facebook" card instead
         m.addEventListener('error', () => {
             if (!stage.contains(m)) return;
+            // MEDIA_ERR_SRC_NOT_SUPPORTED (4) = file not found (404) OR codec the browser can't play (e.g. H.265)
+            console.warn('[gallery] could not play "' + v.file + '" (media error ' + (m.error ? m.error.code : '?') + '). Check Network tab: 404 = file missing/wrong name; 200 = re-encode as H.264.');
             panel.dataset.orient = 'landscape';
             mountFallback(v);
         }, { once: true });
