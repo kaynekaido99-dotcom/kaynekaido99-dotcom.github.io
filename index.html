@@ -58,6 +58,8 @@
     <link rel="stylesheet" href="gallery.css">
     <!-- Component playground styles -->
     <link rel="stylesheet" href="playground.css">
+    <!-- Project reference modal (Payment History) -->
+    <link rel="stylesheet" href="project-modal.css">
     <!-- Credentials marquee styles -->
     <style>
         /* Gradient Masks for Edge Fading */
@@ -398,6 +400,56 @@
                     </div>
                     <span class="text-zinc-500 group-hover:text-zinc-300">&nearrow;</span>
                 </a>
+
+                <!-- Payment History Card (opens the project modal: pictures + video) -->
+                <a href="Photos/Blured.jpg" data-project-modal="payment-history" aria-haspopup="dialog"
+                    class="p-3 bg-zinc-900/60 hover:bg-zinc-800/80 border border-zinc-800 rounded-lg flex justify-between items-center transition-colors group">
+                    <div class="flex items-center gap-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="1.5em" height="1.5em">
+                                <!-- Washing Machine Body -->
+                                <rect x="70" y="25" width="400" height="450" rx="30" ry="30" fill="#FFFFFF"
+                                    stroke="#000" stroke-width="16" stroke-linejoin="round" />
+                                <!-- Control Panel -->
+                                <rect x="70" y="25" width="400" height="90" rx="30" ry="30" fill="#E2DDD9" stroke="#000"
+                                    stroke-width="16" stroke-linejoin="round" />
+                                <rect x="70" y="85" width="400" height="30" fill="#E2DDD9" />
+                                <line x1="70" y1="115" x2="470" y2="115" stroke="#000" stroke-width="16"
+                                    stroke-linecap="round" />
+                                <!-- Control Buttons -->
+                                <circle cx="115" cy="70" r="10" fill="#000" />
+                                <circle cx="150" cy="70" r="10" fill="#000" />
+                                <circle cx="185" cy="70" r="10" fill="#000" />
+                                <circle cx="340" cy="70" r="22" fill="#FF8CA3" stroke="#000" stroke-width="16" />
+                                <circle cx="415" cy="70" r="22" fill="#FFE27A" stroke="#000" stroke-width="16" />
+                                <!-- Door Outer Rim -->
+                                <circle cx="270" cy="295" r="145" fill="#E2DDD9" stroke="#000" stroke-width="16" />
+                                <!-- Glass Inner (Cyan Water Area) -->
+                                <circle cx="270" cy="295" r="110" fill="#67EBFC" stroke="#000" stroke-width="16" />
+                                <!-- Water Wave -->
+                                <path
+                                    d="M 160 295 C 185 280, 210 280, 235 295 C 260 310, 285 310, 310 295 C 335 280, 360 280, 380 295 A 110 110 0 0 1 160 295 Z"
+                                    fill="#21C1F3" />
+                                <path
+                                    d="M 160 295 C 185 280, 210 280, 235 295 C 260 310, 285 310, 310 295 C 335 280, 360 280, 380 295"
+                                    fill="none" stroke="#000" stroke-width="12" stroke-linecap="round" />
+                                <circle cx="270" cy="202" r="10" fill="#000" />
+                                <!-- Front Laundry Basket -->
+                                <path
+                                    d="M 30 330 Q 20 290 60 280 Q 80 240 120 250 Q 150 220 180 260 Q 220 270 210 330 Z"
+                                    fill="#FFA2B6" />
+                                <path
+                                    d="M 30 330 C 10 290, 60 270, 75 280 C 70 240, 130 230, 145 255 C 165 230, 215 250, 200 295 C 225 305, 220 330, 210 330"
+                                    fill="none" stroke="#000" stroke-width="16" stroke-linecap="round" />
+                                <path d="M 30 380 L 50 460 C 55 480, 185 480, 190 460 L 210 380 Z" fill="#FFF07C"
+                                    stroke="#000" stroke-width="16" stroke-linejoin="round" />
+                                <rect x="20" y="330" width="200" height="35" rx="10" ry="10" fill="#FFF07C"
+                                    stroke="#000" stroke-width="16" stroke-linejoin="round" />
+                            </svg>
+                        <span class="text-sm font-medium text-zinc-200">PAYMENT HISTORY<span
+                                class="block text-xs text-zinc-500">Myra's Laundry Shop</span></span>
+                    </div>
+                    <span class="text-zinc-500 group-hover:text-zinc-300">&nearrow;</span>
+                </a>
             </div>
 
             <div id="services" class="mt-6 grid grid-cols-1 rounded-lg sm:grid-cols-2 gap-6">
@@ -570,7 +622,7 @@
                                 <!-- Green Q Ring with bottom-right gap -->
                                 <path
                                     d="M 88.6 93.8 A 42 42 0 1 1 99.6 74.2 L 117.8 81.4 A 61.5 61.5 0 1 0 101.6 109.2 Z"
-                                    fill="#75A928" />
+                                    fill="#1591EA" />
                                 <!-- Orange Top Segment -->
                                 <polygon points="52,48 64,48 76,60 64,60" fill="#EE7913" />
                                 <polygon points="52,48 64,60 64,74 52,62" fill="#D9660A" />
@@ -578,8 +630,8 @@
                                 <polygon points="64,60 76,60 85,69 73,69" fill="#F6E049" />
                                 <polygon points="64,60 73,69 73,83 64,74" fill="#E5C825" />
                                 <!-- Green Bottom Tail Segment -->
-                                <polygon points="73,69 85,69 116,100 104,100" fill="#89B836" />
-                                <polygon points="73,69 104,100 104,114 73,83" fill="#689820" />
+                                <polygon points="73,69 85,69 116,100 104,100" fill="#1591EA" />
+                                <polygon points="73,69 104,100 104,114 73,83" fill="#1591EA" />
                             </svg>
                             <span>QGIS</span>
                         </span>
@@ -1260,6 +1312,7 @@
     <script src="gallery.js"></script>
     <script src="resume.js"></script>
     <script src="playground.js"></script>
+    <script src="project-modal.js"></script>
 
     <!-- Credentials marquee logic (was in interactive.html) -->
     <script>
@@ -1521,6 +1574,16 @@
             else route();
         })();
     </script>
+    <!-- Click-to-spawn network background: click in the dark side margins -->
+    <script>
+        window.NETWORK_BG_OPTIONS = {
+            accent: '#1591EA',
+            // Uses whichever view is showing (home / videos / credentials) to find the side margins
+            contentSelector: '#view-home:not([hidden]), #view-videos:not([hidden]), #view-credentials:not([hidden])',
+            labelPrefix: '10.24.'
+        };
+    </script>
+    <script src="network-bg.js?v=1"></script>
 </body>
 
 </html>
