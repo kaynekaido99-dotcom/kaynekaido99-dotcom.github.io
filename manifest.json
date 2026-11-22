@@ -3,13 +3,13 @@
     "name": "Bokie Portfolio",
     "icons": [
         {
-            "src": "portfolio_app_icon_svg.svg",
+            "src": "Photos/Avatar.png",
             "sizes": "192x192",
             "type": "image/png",
             "purpose": "any"
         },
         {
-            "src": "portfolio_app_icon_svg.svg",
+            "src": "Photos/Avatar.png",
             "sizes": "512x512",
             "type": "image/png",
             "purpose": "any"
