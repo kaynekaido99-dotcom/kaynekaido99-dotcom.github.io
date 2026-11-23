@@ -1,3 +1,6 @@
 Videos/*.mp4
 Videos/*.mp4
 Videos/
+git add .
+git commit -m "Update portfolio videos"
+git push origin main
