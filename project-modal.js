@@ -17,11 +17,13 @@
             items: [
                 { type: 'image', src: 'Photos/Blured.jpg', title: 'Payment History', caption: 'Payment history screen app' },
                 { type: 'image', src: 'Photos/Landing.jpg', title: 'Landing Page' },
-                { type: 'image', src: 'Photos/Login.jpg', title: 'Login' },
+                { type: 'image', src: 'Photos/Login.jpg', title: 'Login form' },
                 // Video: use the full file name (e.g. 'Videos/payment.mp4'). If you give the path WITHOUT an
                 // extension, .mp4 / .webm / .mov / .m4v are tried in that order. 'poster' is optional;
                 // without it, <same path>.jpg/.jpeg/.png/.webp is used when it exists.
-                { type: 'video', src: 'VideoThumbnails/Payment History.mp4', title: 'Payment History Demo', caption: 'Screen recording', poster: '' }
+                { type: 'video', src: 'VideoThumbnails/Payment History.mp4', title: 'Payment History Demo', caption: 'Continuue with FB/Google', poster: '' },
+                { type: 'video', src: 'VideoThumbnails/Payment.mp4', title: 'Payment History Demo', caption: 'Select unpaid Customer', poster: '' },
+                { type: 'video', src: 'VideoThumbnails/Add customer.mp4', title: 'Payment History Demo', caption: 'Add paid customer', poster: '' }
             ]
         }
     };
