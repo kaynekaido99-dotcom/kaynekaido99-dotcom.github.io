@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Shared counters stored in Google Drive via a Google Apps Script web app (see Code.gs).
     // Paste your deployed Web app URL (ends in /exec) below.
-    const API_URL = 'https://script.google.com/macros/s/AKfycbws7oAhkPp8cONekfchIQeEcSppOukZqSozkwG5EeiJ2BsCy9TwWkOm4js0JoH9eAiC/exec';
+    const API_URL = '__GAS_API_URL__';
 
     const pokeCountElement = document.getElementById('poke-count-text');
     const pokeButton = document.getElementById('btn-poke');
