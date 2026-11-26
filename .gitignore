@@ -3,4 +3,4 @@ Videos/*.mp4
 Videos/
 git add .
 git commit -m "Update portfolio videos"
-git push origin main
+git push origin mainlocal-config.js
